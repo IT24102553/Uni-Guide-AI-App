@@ -1,0 +1,15 @@
+{
+  "name": "it24103756-knowledge-base-faq-management",
+  "version": "1.0.0",
+  "description": "Standalone backend for knowledge base FAQ management.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.3"
+  },
+  "devDependencies": {}
+}
+

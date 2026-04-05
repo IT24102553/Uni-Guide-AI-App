@@ -1,0 +1,21 @@
+[
+  {
+    "id": "faq-registration-001",
+    "category": "Registration",
+    "question": "How can students register for a new semester?",
+    "answer": "Students can register through the student portal after clearing outstanding payments and checking prerequisite eligibility.",
+    "tags": ["registration", "student portal"],
+    "status": "published",
+    "updatedAt": "2026-04-05T09:00:00.000Z"
+  },
+  {
+    "id": "faq-support-001",
+    "category": "Support",
+    "question": "Where can students report login issues?",
+    "answer": "Students should contact the IT help desk with their student ID, registered email address, and a screenshot of the error message.",
+    "tags": ["login", "help desk"],
+    "status": "published",
+    "updatedAt": "2026-04-05T09:15:00.000Z"
+  }
+]
+
