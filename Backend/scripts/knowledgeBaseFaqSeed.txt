@@ -1,0 +1,860 @@
+Q: Who can students contact for internship-related questions?
+A: The summary lists saman.g@sliit.lk as the primary contact and anura.p@sliit.lk as the secondary contact. For more details, students can also use the IT4140 CourseWeb page with self-enrollment key IT4140 mentioned in the notice.
+Category: Internship
+Tags: internship, contact, IT4140, self enrollment key
+---
+
+Q: What is the internship registration procedure?
+A: The summary says students should first submit Form I-1A, then submit the supervisor or internship registration Form I-1B.
+Category: Internship
+Tags: internship, form I-1A, form I-1B, registration
+---
+
+Q: What type of internship is accepted?
+A: The internship must be IT-related and should meet the student's specialization requirements.
+Category: Internship
+Tags: internship, IT related, specialization
+---
+
+Q: What is the first requirement before registering an internship?
+A: The summary says the student's name and student ID must be available in the internship dashboard.
+Category: Internship
+Tags: internship, dashboard, student id
+---
+
+Q: What opportunity remains after the Year 3 and Year 4 weekend registration deadline?
+A: The summary says later opportunity is only for internship accepted on the VIVA dashboard, according to the notice.
+Category: Registration
+Tags: weekend registration, internship, viva dashboard
+---
+
+Q: What were the conditions for Year 3 and Year 4 weekend registrations?
+A: The summary says weekend registration for Years 3 and 4 was allowed only for students with a legitimate offer or employment letter before 08/12/2025, or students registered for the internship module whose name appears in the Viva dashboard.
+Category: Registration
+Tags: weekend registration, year 3, year 4, employment letter, internship
+---
+
+Q: Can I use the Group List Issues form for mutual transfers?
+A: No. The notice says the Group List Issues form is not for mutual transfers.
+Category: Grouping
+Tags: group list issues, mutual transfers, not allowed
+---
+
+Q: Can I use the Group List Issues form to transfer between weekday and weekend batches?
+A: No. The notice says the form is not for weekday or weekend batch transfers.
+Category: Grouping
+Tags: group list issues, weekday weekend transfer, not allowed
+---
+
+Q: Are emails or DeskPro tickets considered for group list issues?
+A: No. The notice says emails and DeskPro tickets are not considered for group list issues; students should use the specified form.
+Category: Grouping
+Tags: group list issues, email, deskpro, form
+---
+
+Q: What should I do if my name is missing from the Jan-June 2026 grouping list?
+A: The notice says to continue with the last available group for the coming two days. Once registration is verified, the correct grouping will be updated.
+Category: Grouping
+Tags: missing name, grouping list, registration verification
+---
+
+Q: Does the new Jan-June 2026 grouping list apply to all campuses?
+A: The summary says the new grouping list student view applies only to Malabe.
+Category: Grouping
+Tags: jan june 2026, grouping list, malabe
+---
+
+Q: Where can I find the Jan-June 2026 weekday and weekend timetable folder?
+A: The CourseWeb summary says a weekday and weekend timetable link or folder is provided in the original CourseWeb notice.
+Category: Timetables
+Tags: jan june 2026, timetable folder, weekday, weekend
+---
+
+Q: When does the Jan-June 2026 semester start for FoC Malabe grouping and timetable notices?
+A: The summary says the semester starts on 19th January 2026.
+Category: Semester Commencement
+Tags: jan june 2026, semester start, malabe
+---
+
+Q: What does it mean if modules are highlighted yellow in the hall allocation notice?
+A: The summary says two modules not offered are highlighted in yellow. Students should check the original hall allocation attachment for the exact modules.
+Category: Examinations
+Tags: hall allocation, yellow highlight, modules not offered
+---
+
+Q: What does the hall allocation notice mention?
+A: The summary references hall allocations for Mid Repeat Examinations for the Year 1 October 2025 intake.
+Category: Examinations
+Tags: hall allocation, mid repeat exam, october 2025 intake
+---
+
+Q: What happens to referral sheets after the exam?
+A: The notice says referral sheets will be collected at the end of the exam.
+Category: Examinations
+Tags: referral sheet, collected, final exam
+---
+
+Q: Can I share my referral sheet with another student during the exam?
+A: No. The referral sheet cannot be shared during the exam.
+Category: Examinations
+Tags: referral sheet, sharing, exam rules
+---
+
+Q: What content can be included in a referral sheet?
+A: The summary says students may include formulas, theories, and other facts on the referral sheet.
+Category: Examinations
+Tags: referral sheet, formulas, theories, facts
+---
+
+Q: What information must be written at the top of the referral sheet?
+A: The referral sheet must include the Student ID and Module Code on the top.
+Category: Examinations
+Tags: referral sheet, student id, module code
+---
+
+Q: Can the referral sheet be handwritten or printed?
+A: Yes. The summary says the single A4 referral sheet may be handwritten or printed.
+Category: Examinations
+Tags: referral sheet, handwritten, printed
+---
+
+Q: What size should the referral sheet be?
+A: The referral sheet should be a single A4 sheet.
+Category: Examinations
+Tags: referral sheet, A4, exam rules
+---
+
+Q: Are referral sheets allowed for final exams?
+A: Yes. The summary says all modules allow a referral sheet during final exams.
+Category: Examinations
+Tags: referral sheet, final exams, allowed
+---
+
+Q: Can I request a Year 1 Semester 2 group change or mutual transfer?
+A: No. The notice says groups are not changed and mutual transfers are not permitted.
+Category: Grouping
+Tags: group change, mutual transfer, not allowed
+---
+
+Q: What should I do if my name is missing from the Year 1 Semester 2 grouping list?
+A: The notice says to follow the last available group until your registration is sorted and the grouping is updated.
+Category: Grouping
+Tags: missing name, grouping list, registration
+---
+
+Q: Does the Year 1 Semester 2 grouping list apply to all campuses?
+A: The summary says the new grouping list is for Malabe only.
+Category: Grouping
+Tags: year 1 semester 2, grouping list, malabe only
+---
+
+Q: Are Year 1 Semester 2 timetables available for both weekday and weekend batches?
+A: Yes. The summary says weekday and weekend timetables are available in the CourseWeb notice.
+Category: Timetables
+Tags: year 1 semester 2, weekday, weekend, timetable
+---
+
+Q: What happens if I submit Medical IC documents late?
+A: The notice says late submission or failure to submit the required hardcopy will result in rejection from Medical IC consideration.
+Category: Medical IC
+Tags: medical ic, late submission, rejection
+---
+
+Q: When does Year 1 Semester 2 Jan-June 2026 commence?
+A: The CourseWeb notice says Year 1 Semester 2 Jan-June 2026 commences on 16th February 2026.
+Category: Semester Commencement
+Tags: year 1 semester 2, commencement, jan june 2026
+---
+
+Q: What should students at other centers do for Medical IC submission?
+A: Students at other centers should hand over the documents to their respective coordinator, according to the notice.
+Category: Medical IC
+Tags: medical ic, other centers, coordinator
+---
+
+Q: Where should Malabe students submit Medical IC hardcopies?
+A: The notice says Malabe students should use the dropbox at the 3rd floor, Main Building, Student Success Center.
+Category: Medical IC
+Tags: medical ic, malabe, dropbox
+---
+
+Q: What details should I write on the Medical IC envelope?
+A: The notice says to include the registration number and missed modules on the top-right corner of the envelope.
+Category: Medical IC
+Tags: medical ic, registration number, missed modules
+---
+
+Q: How should I submit the original medical certificate for Medical IC?
+A: The notice says students must submit the original medical certificate hardcopy in an A5 or C5 sealed envelope.
+Category: Medical IC
+Tags: medical certificate, hardcopy, sealed envelope
+---
+
+Q: What was the deadline for exam timetable Version 1 concerns?
+A: The notice says concerns about exam timetable Version 1 had to be submitted by 03.00 pm on 27th February 2026, Friday.
+Category: Examinations
+Tags: exam timetable, version 1, concerns
+---
+
+Q: What is the Medical IC physical handover deadline for October 2025 Year 1 Semester 1?
+A: The notice says the physical handover deadline is 05.00 pm on 17th February 2026, Tuesday.
+Category: Medical IC
+Tags: medical ic, deadline, october 2025 intake
+---
+
+Q: Where can I check registered module details for Jan-June 2026?
+A: The CourseWeb summary references a Faculty-FoC document for registered module details. Students should open the attached document in the original notice.
+Category: Module Registration
+Tags: registered modules, jan june 2026, foc document
+---
+
+Q: What do yellow highlights mean in the revised mid exam timetable?
+A: The notice says changes are highlighted in yellow, so students should carefully check the highlighted rows in the revised timetable.
+Category: Examinations
+Tags: yellow highlights, revised timetable, exam changes
+---
+
+Q: What does the revised mid exam timetable Version 02 cover?
+A: The summary says Version 02 covers Year 2 Semester 2 with block modules and Years 3 and 4 Semester 1 and Semester 2.
+Category: Examinations
+Tags: revised timetable, version 02, mid exam
+---
+
+Q: What were the tentative mid-term exam dates for Year 1 Semester 2 and Year 2 Semester 1?
+A: The tentative mid-term exam period was from 6th to 10th April 2026.
+Category: Examinations
+Tags: tentative exam dates, mid term, april 2026
+---
+
+Q: Are all Wednesday academic activities online according to the notice?
+A: The notice says all academic activities on Wednesdays will be conducted online. Students should still check the latest CourseWeb notices for any later updates.
+Category: Academic Activities
+Tags: online classes, wednesday, courseweb update
+---
+
+Q: Why were Wednesday academic activities moved online?
+A: The summary says Wednesday academic activities were moved online due to a government advisory and essential services situation.
+Category: Academic Activities
+Tags: online classes, wednesday, government advisory
+---
+
+Q: When was IE4010 Information Security Management rescheduled?
+A: IE4010 Information Security Management was rescheduled to 22nd March 2026 from 12.45 to 13.45.
+Category: Examinations
+Tags: IE4010, information security management, rescheduled exam
+---
+
+Q: When was IT4060 Machine Learning rescheduled?
+A: IT4060 Machine Learning was rescheduled to 20th March 2026 from 14.30 to 15.30.
+Category: Examinations
+Tags: IT4060, machine learning, rescheduled exam
+---
+
+Q: When was IE4011 Business Process Management rescheduled?
+A: IE4011 Business Process Management was rescheduled to 19th March 2026 from 09.00 to 10.00.
+Category: Examinations
+Tags: IE4011, business process management, rescheduled exam
+---
+
+Q: When was SE3020 Distributed Systems rescheduled?
+A: SE3020 Distributed Systems was rescheduled to 19th March 2026 from 16.15 to 17.15.
+Category: Examinations
+Tags: SE3020, distributed systems, rescheduled exam
+---
+
+Q: Which modules were mentioned in the rescheduled mid exam timetable?
+A: The summary mentions SE3020 Distributed Systems, IE4011 Business Process Management, IT4060 Machine Learning, and IE4010 Information Security Management.
+Category: Examinations
+Tags: rescheduled exams, SE3020, IE4011, IT4060, IE4010
+---
+
+Q: Were exams scheduled on 18th March 2026 rescheduled?
+A: Yes. The summary says exams scheduled for 18th March 2026 were rescheduled due to the online academic activities notice.
+Category: Examinations
+Tags: rescheduled exams, 18 march 2026
+---
+
+Q: What should students do for IT4010 Research Project registration?
+A: Students should read the IT4010 Research Project registration notice on CourseWeb and follow the stated registration instructions and key dates from the attachment or notice.
+Category: Research Project
+Tags: IT4010, registration, key dates
+---
+
+Q: Who is the IT4010 Research Project registration notice mainly for?
+A: The summary references IT4010 Research Project registration and key dates for Year 3 Semester 2 students.
+Category: Research Project
+Tags: IT4010, research project, year 3 semester 2
+---
+
+Q: How will student community selections be considered?
+A: The summary indicates students should follow the notice and application form instructions. Final selection details should be checked from the official CourseWeb notice or form.
+Category: Student Communities
+Tags: student communities, selection, application
+---
+
+Q: What positions are available in student communities?
+A: The notice lists positions such as President, Vice President, Secretary, Assistant Secretary, Treasurer, Assistant Treasurer, Editor, and 8 committee members.
+Category: Student Communities
+Tags: student communities, positions, committee
+---
+
+Q: Are group applications allowed for student communities?
+A: No. The notice says group applications are not allowed.
+Category: Student Communities
+Tags: student communities, group applications, not allowed
+---
+
+Q: Can I submit more than one student community application?
+A: No. The notice says only one application can be submitted.
+Category: Student Communities
+Tags: student communities, one application
+---
+
+Q: What is the Student Communities application link mentioned in the notice?
+A: The CourseWeb summary includes the application link https://forms.office.com/r/Y2jNkWdTeW.
+Category: Student Communities
+Tags: student communities, application form, microsoft form
+---
+
+Q: On which April 2026 weekend dates will academic activities continue as per timetable?
+A: The notice says academic activities will be conducted according to the timetable on 11th and 19th April 2026.
+Category: Academic Activities
+Tags: weekend classes, timetable, april 2026
+---
+
+Q: What is the deadline to apply for student communities for 2026?
+A: The notice says the deadline is 5th April 2026 at 11:00 PM.
+Category: Student Communities
+Tags: student communities, applications, deadline
+---
+
+Q: Were there any dates with no weekend academic activities in April 2026?
+A: Yes. The summary says there will be no academic activities on 12th and 18th April 2026 for the mentioned weekend group notice.
+Category: Academic Activities
+Tags: weekend classes, april 2026, no academic activities
+---
+
+Q: What should external campus students do about exam timetable session numbers?
+A: External campus students should follow their respective center or campus coordinator's instructions because the session numbers in the notice are for Malabe Campus.
+Category: Examinations
+Tags: external campus, exam sessions, coordinator
+---
+
+Q: Do the session numbers in exam timetable notices apply to all campuses?
+A: The summary says session numbers are only for Malabe Campus. Students from other centers should follow the instructions from their respective coordinators.
+Category: Examinations
+Tags: session numbers, malabe, external centers
+---
+
+Q: Will a fresh exam timetable be posted if there are no schedule changes?
+A: The notice says a fresh timetable will be posted only if there is a change in the schedule.
+Category: Examinations
+Tags: exam timetable, revised timetable, schedule changes
+---
+
+Q: How should I submit concerns about the mid exam timetable?
+A: The CourseWeb notice references a concern form. Students should submit concerns through the specified form, not through informal channels.
+Category: Examinations
+Tags: exam timetable, concern form, mid exam
+---
+
+Q: What is the deadline to submit concerns about the Year 1 Semester 2 and Year 2 Semester 1 mid exam timetable?
+A: The notice says concerns must be submitted by 5.00 pm on 29th March 2026, Sunday.
+Category: Examinations
+Tags: mid exam, timetable concerns, deadline
+---
+
+Q: When are the mid examinations scheduled for Year 1 Semester 2 and Year 2 Semester 1?
+A: The notice says the mid examinations are scheduled on 6th, 7th, 9th, 10th, and 20th April 2026.
+Category: Examinations
+Tags: mid exam, year 1 semester 2, year 2 semester 1
+---
+
+Q: Where can Weekday Batch students find timetable and grouping information?
+A: The notice says the timetable and grouping list are available through the CourseWeb notice attachments or linked files.
+Category: Timetables
+Tags: weekday batch, timetable, grouping list
+---
+
+Q: Can Weekday Batch Year 1 Semester 1 students request group changes?
+A: The notice says groups are final, and group changes or mutual transfers are not permitted.
+Category: Grouping
+Tags: weekday batch, group changes, not allowed
+---
+
+Q: Which students are covered by the Weekday Batch commencement notice?
+A: The notice covers all Faculty of Computing degree programs for Year 1 Semester 1, Jan-June 2026, Weekday Batch at Malabe Campus.
+Category: Semester Commencement
+Tags: weekday batch, foc, malabe, year 1 semester 1
+---
+
+Q: When does the Weekday Batch Year 1 Semester 1 Jan-June 2026 semester commence?
+A: The CourseWeb notice says the Weekday Batch Year 1 Semester 1 Jan-June 2026 semester commences on 30th March 2026.
+Category: Semester Commencement
+Tags: weekday batch, year 1 semester 1, jan june 2026
+---
+
+Q: What supporting files are mentioned for the Weekend Batch commencement notice?
+A: The summary mentions files such as the recording of the awareness session, General Guidelines, and Campus Map. Students should open the original CourseWeb attachments.
+Category: Semester Commencement
+Tags: weekend batch, awareness session, guidelines, campus map
+---
+
+Q: Are mutual group transfers allowed for Weekend Batch students?
+A: No. The notice says mutual transfers will not be permitted.
+Category: Grouping
+Tags: weekend batch, mutual transfers, not allowed
+---
+
+Q: Can Weekend Batch students change groups?
+A: No. The notice says student groupings are final and group changes or mutual transfers will not be permitted.
+Category: Grouping
+Tags: weekend batch, group changes, mutual transfers
+---
+
+Q: What should I do if my name is not in the Weekend Batch grouping document?
+A: The notice says if your name does not appear in the grouping document, your details will be updated during the first week. Until your name is included, follow the last timetable group mentioned in the document.
+Category: Grouping
+Tags: weekend batch, missing name, grouping document
+---
+
+Q: Where can Weekend Batch students find their grouping list?
+A: The notice references a Student Grouping Lists document. Students should use the specified grouping document attached or linked in the CourseWeb notice.
+Category: Grouping
+Tags: weekend batch, grouping list, student groups
+---
+
+Q: Which campus is mentioned in the Weekend Batch commencement notice?
+A: The notice refers to the Malabe Campus.
+Category: Semester Commencement
+Tags: weekend batch, malabe campus
+---
+
+Q: Where can Weekend Batch students find their Year 1 Semester 1 timetable?
+A: The notice says the Year 1 Semester 1 timetable is attached or linked in the CourseWeb notice. Students should open the timetable attachment or link from CourseWeb.
+Category: Timetables
+Tags: weekend batch, timetable, year 1 semester 1
+---
+
+Q: Which programs are included in the Weekend Batch commencement notice?
+A: The notice mentions Bachelor of Science Honours in Information Technology, Software Engineering, and Data Science for the weekend batch.
+Category: Semester Commencement
+Tags: weekend batch, IT, software engineering, data science
+---
+
+Q: Which students were excepted from the Wednesday physical activity update?
+A: The exception mentioned in the notice is Year 2 Semester 2 IT students.
+Category: Academic Activities
+Tags: year 2 semester 2, IT students, academic activities
+---
+
+Q: When does the Weekend Batch Year 1 Semester 1 Jan-June 2026 semester commence?
+A: The CourseWeb notice says the Weekend Batch Year 1 Semester 1 Jan-June 2026 semester commences on 4th April 2026.
+Category: Semester Commencement
+Tags: weekend batch, year 1 semester 1, jan june 2026
+---
+
+Q: What did the Academic Activities Update for Wednesday say?
+A: The notice says all academic activities, except for Year 2 Semester 2 IT students, will be conducted physically tomorrow, Wednesday.
+Category: Academic Activities
+Tags: academic activities, wednesday, physical classes
+---
+
+Q: Are email or DeskPro requests accepted for Dean's List eligibility concerns?
+A: No. The notice says only the specified form will be considered, and emails or DeskPro tickets will not be considered for Dean's List eligibility concerns.
+Category: Dean's List
+Tags: deans list, deskpro, email, concerns
+---
+
+Q: How should I submit a Dean's List eligibility concern?
+A: The notice says concerns must be submitted through the Microsoft Form linked in the CourseWeb notice.
+Category: Dean's List
+Tags: deans list, concerns, microsoft form
+---
+
+Q: What is the deadline to raise concerns about Dean's List eligibility?
+A: The CourseWeb notice says Dean's List eligibility concerns must be submitted before 12.00 midnight on Sunday, 29th March 2026.
+Category: Dean's List
+Tags: deans list, concern deadline, eligibility concerns
+---
+
+Q: I am a Year 4 Semester 2 FoC student. Is there a special Dean's List rule for me?
+A: Yes. The notice says Year 4 Semester 2 FoC students must have obtained B or higher for all subjects, in addition to the other Dean's List eligibility conditions.
+Category: Dean's List
+Tags: deans list, year 4 semester 2, grades
+---
+
+Q: What are the main Dean's List eligibility requirements?
+A: The summary says students must have attempted all exams without incomplete stages, obtained a GPA above 3.70, maintained an excellent disciplinary record, and for Year 4 Semester 2 FoC students, earned B or higher for all subjects.
+Category: Dean's List
+Tags: deans list, eligibility, exams, disciplinary record
+---
+
+Q: What GPA is required for Dean's List eligibility?
+A: The CourseWeb notice states that a student should have a GPA above 3.70, along with the other eligibility conditions mentioned in the notice.
+Category: Dean's List
+Tags: deans list, eligibility, gpa
+---
+
+Q: Where can I find the Dean's List eligible list?
+A: The CourseWeb summary references an attached file named "Dean's List eligible list - 2025 Jul Dec Semester." Students should open the attachment on the original CourseWeb notice.
+Category: Dean's List
+Tags: deans list, eligible list, attachment
+---
+
+Q: Which Dean's List semester is the eligible list notice about?
+A: The eligible list notice is for the July-December 2025 semester.
+Category: Dean's List
+Tags: deans list, eligible list, july december 2025
+---
+
+Q: Can I call by telephone to confirm Dean's List ceremony participation?
+A: No. The notice says telephone requests will not be considered for confirming participation in the award ceremony.
+Category: Dean's List
+Tags: deans list, telephone, not accepted
+---
+
+Q: What happens if I do not fill the Dean's List participation confirmation form?
+A: The notice says students who fail to fill the form will not be allowed to attend the award ceremony.
+Category: Dean's List
+Tags: deans list, confirmation form, attendance
+---
+
+Q: Can I use a support desk ticket to confirm Dean's List ceremony participation?
+A: No. The notice says support desk tickets will not be considered for confirming participation in the award ceremony.
+Category: Dean's List
+Tags: deans list, support desk, not accepted
+---
+
+Q: Can I confirm Dean's List ceremony participation by email?
+A: No. The notice says no email requests will be considered for confirming participation in the award ceremony.
+Category: Dean's List
+Tags: deans list, email, not accepted
+---
+
+Q: How do I confirm participation for the Dean's List Award Ceremony?
+A: Students must use the attached participation confirmation form linked in the CourseWeb notice. The notice specifically says confirmation should be done through that form.
+Category: Dean's List
+Tags: deans list, participation form, confirmation
+---
+
+Q: What is the deadline to confirm participation for the Dean's List Award Ceremony?
+A: The CourseWeb notice says students should confirm participation on or before 09.00 am on 17th April 2026, Friday.
+Category: Dean's List
+Tags: deans list, confirmation deadline, form
+---
+
+Q: What time should Dean's List award recipients arrive for registration?
+A: Students are requested to arrive by 8:15 AM for registration before the 9:00 AM ceremony.
+Category: Dean's List
+Tags: deans list, registration, arrival time
+---
+
+Q: Where will the Dean's List Award Ceremony be held?
+A: The ceremony will be held at the Main Auditorium, Malabe Campus.
+Category: Dean's List
+Tags: deans list, venue, main auditorium, malabe
+---
+
+Q: When is the Dean's List Award Ceremony for the July-December 2025 semester?
+A: According to the CourseWeb notice, the Dean's List Award Ceremony for the July-December 2025 semester will be held on 7th May 2026 at 9:00 AM.
+Category: Dean's List
+Tags: deans list, award ceremony, july december 2025
+---
+
+Q: Who should I follow for exam-related notices?
+A: Exam timetable and medical IC notices in the summary are issued through the Faculty of Computing examination or administration notices. Students should follow the CourseWeb notice instructions and the stated form or submission method.
+Category: CourseWeb General
+Tags: examinations, exam notices, courseweb
+---
+
+Q: Who signs many of the Faculty of Computing notices in the summary?
+A: Several academic activity and administrative notices are signed by Hemantha Muthukumaran, Director Administration / FOC.
+Category: CourseWeb General
+Tags: director administration, foc notices
+---
+
+Q: How should I ask questions about CourseWeb notices to get accurate answers?
+A: Include your year, semester, batch, program, campus, and the notice topic. For example, ask "What is the Year 1 Semester 1 weekday commencement date for FoC Malabe?" instead of only asking "When do classes start?"
+Category: CourseWeb General
+Tags: asking questions, year, semester, campus
+---
+
+Q: Should I rely only on UniGuide answers for CourseWeb notices?
+A: UniGuide can summarize the scraped CourseWeb notices, but students should verify important deadlines, forms, attachments, and eligibility details on the original CourseWeb page because CourseWeb is the official source.
+Category: CourseWeb General
+Tags: official source, verification, courseweb
+---
+
+Q: What kind of information can students find on the Faculty Notices CourseWeb page?
+A: Students can find announcements about academic activities, exam timetables, Dean's List notices, student community applications, module registration details, medical IC submissions, grouping lists, timetables, internship procedures, and related attachments.
+Category: CourseWeb General
+Tags: courseweb, announcements, notices, faculty of computing
+---
+
+Q: What is the CourseWeb page used for these Faculty of Computing notices?
+A: The synced CourseWeb page is the Faculty Notices - Faculty of Computing page at https://courseweb.sliit.lk/course/view.php?id=25. It contains official FoC announcements, timetables, exam notices, academic activity updates, grouping information, forms, and attachments.
+Category: CourseWeb General
+Tags: courseweb, faculty notices, foc, course 25
+---
+
+Q: What is the procedure for reporting and recovering a lost item on campus?
+A: SLIIT Lost and Found Policy (Student Notice):
+
+If you lost an item:
+1. Report the loss to the nearest Security Checkpoint or visit the Campus Security and Safety Unit (CSSU).
+2. Provide a description of the item, when and where it was last seen, and your contact details.
+3. Check the Lost and Found register at the CSSU office regularly.
+4. Unclaimed items are held for a limited period before disposal.
+
+If you found an item:
+1. Hand it over immediately to the nearest Security Checkpoint or CSSU.
+2. Do not attempt to keep or use items found on campus.
+
+CSSU Contact: 011 754 3161 or Internal Ext: 3161
+Lost ID cards must also be reported to the Student Services office for a replacement.
+Category: General
+Tags: lost and found, lost item, campus security, CSSU, student ID, found item
+---
+
+Q: Where are the key facilities located on the SLIIT Malabe Campus?
+A: Key facilities on the SLIIT Malabe Campus (New Kandy Road, Malabe):
+
+Academic Buildings:
+- Faculty of Computing, Faculty of Engineering, Faculty of Humanities and Sciences
+- SLIIT Business School, School of Architecture
+- Faculty of Graduate Studies and Research
+- William Angliss Institute @ SLIIT
+
+Student Services:
+- Reception / Student Services - Ground Floor, Main Building
+- Library - Main Building
+- Medical Center - near International Programmes Unit
+- International Office, Administration Department
+
+Sports and Recreation:
+- Basketball Court, Tennis Court, Volleyball Court, Badminton Court
+- Indoor Sports Gym, Sports Ground, Student Recreation Area
+
+Other: Auditorium, Student Car Park, Security Checkpoint at main entrance.
+Visit www.sliit.lk for a 360-degree virtual campus tour.
+Category: Library
+Tags: campus map, facilities, library, medical center, auditorium, sports, Malabe
+---
+
+Q: What is the SLIIT Scholarship Scheme and how do I apply?
+A: SLIIT offers a Scholarship Scheme to support academically outstanding students:
+
+Types of scholarships available:
+- Merit-based scholarships for top performing students in each intake.
+- Financial assistance / need-based scholarships.
+- Sports and co-curricular achievement scholarships.
+
+Eligibility (check SLIIT_Scholarship_Scheme.pdf for current year criteria):
+- Maintain the required minimum GPA for the scholarship category.
+- Have no outstanding disciplinary record.
+- Submit the application before the published deadline.
+
+How to apply:
+1. Download the Scholarship Application Form from the SLIIT website or Student Services.
+2. Attach required documents (A/L results, transcripts, achievement certificates).
+3. Submit to the Student Services Division before the deadline.
+4. Decisions are communicated via your SLIIT email.
+
+Contact Student Services or visit www.sliit.lk for the current scholarship circular.
+Category: Fees & Payments
+Tags: scholarship, financial aid, merit, GPA, student services, fees
+---
+
+Q: What GenAI tools are approved for use in my studies at SLIIT?
+A: SLIIT recognizes the value of Generative AI tools when used appropriately:
+
+Approved tools (as per April 2025 GenAI guidelines):
+- SLIIT-provided AI Tutor Chatbots on CourseWeb (powered by OpenAI Custom GPTs).
+- General GenAI tools like ChatGPT, Gemini, and Copilot for study assistance and brainstorming.
+
+Important rules:
+- AI-generated content must NOT be submitted as your own work without proper acknowledgment.
+- Using AI to write assignments or exam answers without disclosure is academic misconduct.
+- Always verify AI outputs against official module content on CourseWeb: https://courseweb.sliit.lk/
+
+The 'GenAI tools for your Studies' guide is available on CourseWeb.
+Category: IT Support
+Tags: GenAI, AI tools, ChatGPT, academic integrity, CourseWeb, study
+---
+
+Q: How do I use SLIIT's AI Tutor chatbots on CourseWeb to help with my studies?
+A: SLIIT's Centre of Excellence in AI has deployed personalized AI tutor chatbots for students:
+
+How to access:
+1. Create a free account at https://chatgpt.com/ (OpenAI account required).
+2. Open CourseWeb: https://courseweb.sliit.lk/ and navigate to your module.
+3. Find the chatbot link in the top section of the module page and click it.
+4. You will be redirected to the OpenAI interface where the chatbot is hosted.
+
+Usage tips:
+- Ask module-specific questions to get responses based on module content.
+- Free GPT-3.5 accounts have usage limits. You may see 'You have reached your limit - try again after [time]'.
+- For official module content, always cross-check with CourseWeb.
+
+Support contacts:
+- Prof. Nuwan Kodagoda: nuwan.k@sliit.lk
+- Ms. Madhumini Gunaratne: madhumini.g@sliit.lk
+Category: IT Support
+Tags: AI chatbot, tutor, OpenAI, ChatGPT, CourseWeb, GenAI, study tools
+---
+
+Q: How do I access my student timetable for Semester I January 2026?
+A: The Student Timetable for Semester I January 2026 is available in two versions:
+- Weekday Version IV - for weekday program students
+- Weekend Version III - for weekend program students
+
+Access options:
+1. CourseWeb: https://courseweb.sliit.lk/ - navigate to your course and look for Timetable announcements.
+2. SLIIT student portal (ERP system) at www.sliit.lk
+3. Notice boards at your campus (Malabe, Metropolitan, Matara, Kurunegala).
+
+IT2130 online lecture links are posted separately on CourseWeb.
+If you cannot find your timetable, contact your faculty coordinator or the Student Services office.
+Category: Academic
+Tags: timetable, January 2026, semester 1, weekday, weekend, schedule
+---
+
+Q: What modules are offered in Semester I of 2026 for computing students?
+A: The 2026 Semester I module offerings for the Faculty of Computing include:
+
+Year 1 Semester 1 (October Intake 2025):
+- IE1030, IT1120 (Midterm exams held December 2025)
+- Final Examinations: January-February 2026 at Malabe, Metro, and other campuses.
+
+Year 4 Semester I (January-June 2026):
+- Additional modules added to the timetable as of 5-Feb-2026.
+
+Online lectures: IT2130 (links shared via CourseWeb), IT1170 (Y1S2 online sessions).
+
+Full module listings: 'Module Offering 2026 Semester I' notice on CourseWeb: https://courseweb.sliit.lk/
+For specific module queries, contact your academic advisor or the Faculty of Computing office.
+Category: Academic
+Tags: modules, semester 1, 2026, timetable, Year 1, Year 4, Faculty of Computing
+---
+
+Q: How is the Dean's List determined and what are the eligibility criteria at SLIIT?
+A: The SLIIT Faculty of Computing Dean's List recognizes outstanding academic performance:
+
+Eligibility Criteria:
+- Complete all modules for the semester without any failures.
+- Achieve a GPA of 3.7 or above (out of 4.0) for the relevant semester.
+- No outstanding disciplinary or conduct issues.
+- Part-time and weekend program students are eligible if they meet the above criteria.
+
+The Dean's List is published each semester for Malabe Campus, Metropolitan Campus, and Matara Centre students.
+The 2025 January-June Semester Dean's List contains over 400 eligible students from Year 1 to Year 4.
+Check CourseWeb and official SLIIT notice boards for the latest announcements.
+Category: Academic
+Tags: Dean's List, GPA, academic excellence, honors, semester results
+---
+
+Q: How do I apply for a program transfer at SLIIT?
+A: To apply for a program transfer for the 2026 January-June semester:
+1. Obtain the Program Transfer Form from Student Services or download from SLIIT website / CourseWeb.
+2. Fill in your current program, desired program, and reasons for transfer.
+3. Attach supporting documents (academic transcripts, faculty recommendation if required).
+4. Submit the form to the Student Services Division before the transfer deadline.
+5. Transfers are subject to seat availability and management approval.
+6. You will be notified of the decision via your SLIIT email.
+
+Note: You must have completed at least one full semester to be eligible. Contact Student Services for specific eligibility criteria.
+Category: Registration
+Tags: program transfer, transfer form, student services, semester
+---
+
+Q: How do I use the SLIIT ERP system and what can I do with it?
+A: The SLIIT ERP system is the central student portal. You can use it to:
+- Register for modules and courses for the upcoming semester.
+- View and download your timetable.
+- Check your academic results and GPA.
+- Pay fees online and view your payment history.
+- Apply for program transfers, deferrals, and other academic requests.
+- View announcements and notifications from the administration.
+
+Access: via the SLIIT student portal at www.sliit.lk
+If you cannot log in, contact the IT Helpdesk or Student Services at your campus.
+(ERP updated: 27 Feb 2025)
+Category: Registration
+Tags: ERP, student portal, module registration, fees, timetable, results
+---
+
+Q: How do I apply to sit for an examination that I missed due to illness or absence?
+A: If you missed an examination due to illness or an emergency:
+1. Obtain a valid medical certificate from a registered medical practitioner.
+2. Submit the certificate to Student Services within 3 working days of the missed exam.
+3. Fill out the Excuse for Absence / Medical Referral request form from the Student Services office.
+4. Await approval from your Faculty Head or the Registrar's office.
+5. You may be allowed to sit a replacement or repeat examination at the next available opportunity.
+
+Note: Self-declared illness without medical documentation will not be accepted.
+Contact Student Services for the current form (Excuse for Absence guidelines, version 3, updated 11.12.2025).
+Category: Examinations
+Tags: missed exam, medical certificate, absence, repeat exam, student services
+---
+
+Q: What are the rules for SLIIT examinations that students must follow?
+A: SLIIT Examination Rules (students must adhere strictly):
+- Students must bring their valid Student ID card to every examination.
+- Entry to the examination hall closes 30 minutes after the exam starts.
+- No electronic devices (mobile phones, smartwatches, etc.) are allowed in the hall.
+- Bags and personal belongings must be left outside. Only allowed stationery may be brought in.
+- Written materials and notes are prohibited unless it is an open-book exam.
+- Students must remain seated for the full duration unless permitted by the supervisor.
+- Academic dishonesty or cheating will result in disciplinary action including possible dismissal.
+- If you fall ill during an exam, inform the supervisor immediately.
+- Results may be withheld if examination fees are not settled.
+Category: Examinations
+Tags: exam rules, examinations, conduct, student ID, cheating, academic integrity
+---
+
+Q: What is the procedure if I find a suspicious package or receive a bomb threat on campus?
+A: If you find a suspicious package:
+- DO NOT handle, open, or move the object.
+- Turn off nearby portable radios and cell phones.
+- Move away from the area immediately and secure the area by closing nearby doors.
+- Immediately inform CSSU at 011 754 3161 or Ext 3161, or dial 119 / Army Bomb Squad at 011 243 4251.
+
+If you receive a bomb threat by phone:
+- Remain calm and do not hang up.
+- Note the caller's exact words, voice details, and any background sounds.
+- Immediately inform CSSU after the call.
+Category: General
+Tags: bomb threat, suspicious package, emergency, safety, security
+---
+
+Q: Who should I contact in a campus emergency and what are the key emergency numbers?
+A: In any campus emergency, contact the Campus Safety and Security Unit (CSSU):
+- CSSU Direct Line: 011 754 3161 or Internal Ext: 3161
+
+Key Emergency Numbers:
+- Police: 119 / 011 243 3333
+- Fire and Ambulance (Malabe): 011 257 1102
+- Ambulance (Suwasariya): 1990
+- Army Bomb Disposal: 011 243 4251
+- Divisional Hospital Thalangama: 011 286 2313
+- Dr. Navil Fernando Hospital: 011 240 7600
+- General Hospital Accident Service: 011 269 1111
+
+For medical emergencies on campus, contact CSSU at 011 754 3161 (available even during non-working hours).
+Category: General
+Tags: emergency, contacts, safety, police, ambulance, CSSU
+---
+
+Q: What should I do if I discover a fire on campus?
+A: If you discover a fire on campus, follow these steps:
+1. Activate the fire alarm on your way out of the building.
+2. If minor, use a fire extinguisher - remember PASS: Pull the pin, Aim at the base, Squeeze the handle, Sweep side to side.
+3. Do NOT use elevators - use fire stairs only.
+4. If smoke is present, stay near the floor where air is less toxic.
+5. Close doors and windows as you leave if safe to do so.
+6. Report to your designated assembly point after evacuating.
+7. For serious fires, dial 119 and notify Campus Security (CSSU) at 011 754 3161 or Ext: 3161.
+Do not re-enter an evacuated building until an authorized officer declares it safe.
+Category: General
+Tags: fire, emergency, safety, evacuation, campus security
