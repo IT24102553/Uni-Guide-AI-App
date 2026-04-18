@@ -25,10 +25,45 @@
         <input id="searchInput" type="search" placeholder="Search by question, category, answer, or tag" />
       </section>
 
+      <section class="panel">
+        <form id="faqForm" class="faq-form">
+          <input id="faqId" type="hidden" />
+          <div class="form-grid">
+            <label>
+              Category
+              <input id="categoryInput" required placeholder="Registration, Exams, Support" />
+            </label>
+            <label>
+              Status
+              <select id="statusInput">
+                <option value="published">Published</option>
+                <option value="draft">Draft</option>
+              </select>
+            </label>
+          </div>
+          <label>
+            Question
+            <input id="questionInput" required placeholder="Question students commonly ask" />
+          </label>
+          <label>
+            Answer
+            <textarea id="answerInput" required placeholder="Clear answer for the knowledge base"></textarea>
+          </label>
+          <label>
+            Tags
+            <input id="tagsInput" placeholder="registration, portal, payment" />
+          </label>
+          <div class="actions">
+            <button type="button" class="secondary" id="clearButton">Clear</button>
+            <button type="submit" id="saveButton">Add FAQ</button>
+          </div>
+        </form>
+      </section>
+
+      <p id="feedback" class="feedback" role="status"></p>
       <section id="faqList" class="faq-list" aria-live="polite"></section>
     </main>
 
     <script src="./app.js"></script>
   </body>
 </html>
-
