@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IT24102383 Feedback Demo</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="header">
+        <div>
+          <p class="eyebrow">Resolved Tickets</p>
+          <h1>Ticket Feedback</h1>
+          <p class="subtitle">Submit ratings for resolved support tickets and review the feedback summary.</p>
+        </div>
+        <button id="refreshButton" type="button">Refresh</button>
+      </section>
+
+      <section class="summary-grid" aria-label="Feedback summary">
+        <article class="summary-card">
+          <span class="summary-value" id="averageRating">0.0</span>
+          <span class="summary-label">Average Rating</span>
+        </article>
+        <article class="summary-card">
+          <span class="summary-value" id="totalSubmissions">0</span>
+          <span class="summary-label">Total Feedbacks</span>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <div>
+          <h2>Resolved / Closed Tickets</h2>
+          <div id="ticketList" class="ticket-list"></div>
+        </div>
+
+        <aside class="panel">
+          <h2>Feedback Form</h2>
+          <form id="feedbackForm">
+            <label>
+              Ticket
+              <select id="ticketSelect" required></select>
+            </label>
+            <label>
+              Rating
+              <select id="ratingSelect" required>
+                <option value="">Select rating</option>
+                <option value="5">5 - Excellent</option>
+                <option value="4">4 - Great</option>
+                <option value="3">3 - Good</option>
+                <option value="2">2 - Fair</option>
+                <option value="1">1 - Needs attention</option>
+              </select>
+            </label>
+            <label>
+              Comment
+              <textarea id="commentInput" maxlength="500" rows="5" placeholder="Write feedback about the resolved ticket"></textarea>
+            </label>
+            <div class="actions">
+              <button type="submit">Save Feedback</button>
+              <button id="deleteButton" class="secondary" type="button">Delete Feedback</button>
+            </div>
+          </form>
+          <p id="message" class="message" role="status"></p>
+        </aside>
+      </section>
+    </main>
+    <script src="./src/app.js"></script>
+  </body>
+</html>
