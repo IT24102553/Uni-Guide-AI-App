@@ -1,7 +1,9 @@
 const fs = require("fs/promises");
 const path = require("path");
 
-const DATA_FILE = path.resolve(__dirname, "../data/faqs.json");
+const DATA_FILE = process.env.FAQ_DATA_FILE
+  ? path.resolve(process.env.FAQ_DATA_FILE)
+  : path.resolve(__dirname, "../data/faqs.json");
 const VALID_STATUSES = new Set(["draft", "published"]);
 
 async function readFaqs() {
