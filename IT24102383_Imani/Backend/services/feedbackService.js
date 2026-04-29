@@ -1,31 +1,16 @@
-const eligibleStatuses = ["Resolved", "Closed"];
+const {
+  FEEDBACK_ELIGIBLE_STATUSES,
+  createFeedbackSummary,
+  createTicketFeedback,
+  isFeedbackEligibleStatus,
+} = require("../models/TicketFeedback");
 
 function cloneTicket(ticket) {
   return JSON.parse(JSON.stringify(ticket));
 }
 
 function isFeedbackEligible(ticket) {
-  return eligibleStatuses.includes(ticket.status);
-}
-
-function validateRating(rating) {
-  const numericRating = Number(rating);
-
-  if (!Number.isInteger(numericRating) || numericRating < 1 || numericRating > 5) {
-    throw new Error("Rating must be between 1 and 5 stars.");
-  }
-
-  return numericRating;
-}
-
-function validateComment(comment) {
-  const cleanComment = String(comment || "").trim();
-
-  if (cleanComment.length > 500) {
-    throw new Error("Feedback comment must be 500 characters or fewer.");
-  }
-
-  return cleanComment;
+  return isFeedbackEligibleStatus(ticket.status);
 }
 
 function createFeedbackService(tickets) {
@@ -44,14 +29,8 @@ function createFeedbackService(tickets) {
       throw new Error("Feedback can only be added for resolved or closed tickets.");
     }
 
-    const now = new Date().toISOString();
-    ticket.feedback = {
-      rating: validateRating(payload.rating),
-      comment: validateComment(payload.comment),
-      submittedAt: ticket.feedback?.submittedAt || now,
-      updatedAt: now,
-    };
-    ticket.updatedAt = now;
+    ticket.feedback = createTicketFeedback(payload, ticket.feedback);
+    ticket.updatedAt = ticket.feedback.updatedAt;
 
     return cloneTicket(ticket);
   }
@@ -75,21 +54,9 @@ function createFeedbackService(tickets) {
 
   function getDashboard() {
     const feedbackTickets = tickets.filter((ticket) => isFeedbackEligible(ticket) && ticket.feedback);
-    const breakdown = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-    const totalRating = feedbackTickets.reduce((sum, ticket) => {
-      const rating = Number(ticket.feedback.rating);
-      breakdown[rating] += 1;
-      return sum + rating;
-    }, 0);
 
     return {
-      summary: {
-        totalSubmissions: feedbackTickets.length,
-        averageRating: feedbackTickets.length
-          ? Number((totalRating / feedbackTickets.length).toFixed(1))
-          : 0,
-        breakdown,
-      },
+      summary: createFeedbackSummary(tickets),
       feedbacks: feedbackTickets.map(cloneTicket),
     };
   }
@@ -104,5 +71,5 @@ function createFeedbackService(tickets) {
 
 module.exports = {
   createFeedbackService,
-  eligibleStatuses,
+  eligibleStatuses: FEEDBACK_ELIGIBLE_STATUSES,
 };

@@ -159,6 +159,14 @@ h2 {
   padding: 12px;
 }
 
+.empty {
+  background: white;
+  border: 1px dashed #b8c7d9;
+  border-radius: 8px;
+  color: #5d6b82;
+  padding: 16px;
+}
+
 .panel {
   padding: 18px;
   position: sticky;

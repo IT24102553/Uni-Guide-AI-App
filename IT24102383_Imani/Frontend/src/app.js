@@ -1,4 +1,4 @@
-const apiBaseUrl = "http://localhost:5050/api";
+const apiBaseUrl = window.FEEDBACK_API_URL || "http://localhost:5050/api";
 
 const state = {
   tickets: [],
@@ -34,6 +34,12 @@ function setMessage(text, type = "success") {
 function renderTickets() {
   ticketList.innerHTML = "";
   ticketSelect.innerHTML = "";
+
+  if (!state.tickets.length) {
+    ticketList.innerHTML = '<p class="empty">No resolved or closed tickets are available for feedback.</p>';
+    ticketSelect.innerHTML = '<option value="">No eligible tickets</option>';
+    return;
+  }
 
   state.tickets.forEach((ticket) => {
     const option = document.createElement("option");
@@ -108,6 +114,10 @@ document.getElementById("feedbackForm").addEventListener("submit", async (event)
 
   try {
     const ticketId = ticketSelect.value;
+    if (!ticketId) {
+      throw new Error("Select a resolved ticket before saving feedback.");
+    }
+
     await request(`/tickets/${ticketId}/feedback`, {
       method: "PUT",
       body: JSON.stringify({
@@ -126,6 +136,10 @@ document.getElementById("feedbackForm").addEventListener("submit", async (event)
 document.getElementById("deleteButton").addEventListener("click", async () => {
   try {
     const ticketId = ticketSelect.value;
+    if (!ticketId) {
+      throw new Error("Select a resolved ticket before deleting feedback.");
+    }
+
     await request(`/tickets/${ticketId}/feedback`, { method: "DELETE" });
     await refresh();
     selectTicket(ticketId);
