@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
-const { createFaq, deleteFaq, listFaqs, updateFaq } = require("./faqStore");
+const { createFaq, deleteFaq, getFaqSummary, listFaqs, updateFaq } = require("./faqStore");
 
 const app = express();
 const port = Number(process.env.PORT || 5056);
@@ -11,10 +11,24 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(frontendPath));
 
+app.get("/api/health", async (req, res) => {
+  try {
+    const summary = await getFaqSummary();
+    res.json({
+      module: "Knowledge Base FAQ Management",
+      status: "ready",
+      summary,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "FAQ module is not ready." });
+  }
+});
+
 app.get("/api/faqs", async (req, res) => {
   try {
     const faqs = await listFaqs({ search: req.query.search });
-    res.json({ count: faqs.length, faqs });
+    const summary = await getFaqSummary();
+    res.json({ count: faqs.length, summary, faqs });
   } catch (error) {
     res.status(500).json({ message: "Unable to load FAQs." });
   }

@@ -1,6 +1,9 @@
 const faqList = document.querySelector("#faqList");
 const faqCount = document.querySelector("#faqCount");
+const publishedCount = document.querySelector("#publishedCount");
+const draftCount = document.querySelector("#draftCount");
 const searchInput = document.querySelector("#searchInput");
+const refreshButton = document.querySelector("#refreshButton");
 const faqForm = document.querySelector("#faqForm");
 const faqId = document.querySelector("#faqId");
 const categoryInput = document.querySelector("#categoryInput");
@@ -14,6 +17,22 @@ const feedback = document.querySelector("#feedback");
 
 let currentFaqs = [];
 
+function formatDate(value) {
+  const date = value ? new Date(value) : null;
+
+  if (!date || Number.isNaN(date.getTime())) {
+    return "recently";
+  }
+
+  return date.toLocaleString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
+
 function escapeHtml(value) {
   return String(value || "")
     .replace(/&/g, "&amp;")
@@ -26,6 +45,8 @@ function escapeHtml(value) {
 function renderFaqs(faqs) {
   currentFaqs = faqs;
   faqCount.textContent = faqs.length;
+  publishedCount.textContent = faqs.filter((faq) => faq.status === "published").length;
+  draftCount.textContent = faqs.filter((faq) => faq.status === "draft").length;
 
   if (!faqs.length) {
     faqList.innerHTML = '<div class="empty">No matching FAQs found.</div>';
@@ -43,7 +64,9 @@ function renderFaqs(faqs) {
           <div class="badge-row">${tags}</div>
           <h2>${escapeHtml(faq.question)}</h2>
           <p>${escapeHtml(faq.answer)}</p>
-          <p><strong>Status:</strong> ${escapeHtml(faq.status || "published")}</p>
+          <div class="faq-meta">
+            Status: ${escapeHtml(faq.status || "published")} | Updated: ${escapeHtml(formatDate(faq.updatedAt))}
+          </div>
           <div class="card-actions">
             <button type="button" class="secondary" data-action="edit" data-id="${escapeHtml(faq.id)}">Edit</button>
             <button type="button" class="danger" data-action="delete" data-id="${escapeHtml(faq.id)}">Delete</button>
@@ -97,6 +120,13 @@ async function saveFaq(event) {
 }
 
 async function deleteFaq(id) {
+  const faq = currentFaqs.find((item) => item.id === id);
+  const label = faq ? `"${faq.question}"` : "this FAQ";
+
+  if (!window.confirm(`Delete ${label}?`)) {
+    return;
+  }
+
   const response = await fetch(`/api/faqs/${encodeURIComponent(id)}`, {
     method: "DELETE",
   });
@@ -166,6 +196,14 @@ searchInput.addEventListener("input", () => {
   loadFaqs().catch(() => {
     faqList.innerHTML = '<div class="empty">Unable to load FAQs.</div>';
   });
+});
+
+refreshButton.addEventListener("click", () => {
+  loadFaqs()
+    .then(() => setFeedback("FAQ library refreshed."))
+    .catch(() => {
+      faqList.innerHTML = '<div class="empty">Unable to load FAQs.</div>';
+    });
 });
 
 loadFaqs().catch(() => {

@@ -78,18 +78,33 @@ function validateFaqPayload(payload, partial = false) {
 async function listFaqs(filters = {}) {
   const faqs = await readFaqs();
   const query = normalizeText(filters.search);
+  const sortedFaqs = [...faqs].sort((a, b) => String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
 
   if (!query) {
-    return faqs;
+    return sortedFaqs;
   }
 
-  return faqs.filter((faq) => {
+  return sortedFaqs.filter((faq) => {
     const haystack = [faq.category, faq.question, faq.answer, faq.status, ...(faq.tags || [])]
       .map(normalizeText)
       .join(" ");
 
     return haystack.includes(query);
   });
+}
+
+async function getFaqSummary() {
+  const faqs = await readFaqs();
+  const categoryCount = new Set(faqs.map((faq) => normalizeText(faq.category)).filter(Boolean)).size;
+  const publishedCount = faqs.filter((faq) => faq.status === "published").length;
+  const draftCount = faqs.filter((faq) => faq.status === "draft").length;
+
+  return {
+    total: faqs.length,
+    categories: categoryCount,
+    published: publishedCount,
+    draft: draftCount,
+  };
 }
 
 async function createFaq(payload) {
@@ -141,6 +156,7 @@ async function deleteFaq(id) {
 module.exports = {
   createFaq,
   deleteFaq,
+  getFaqSummary,
   listFaqs,
   updateFaq,
 };

@@ -14,15 +14,28 @@
           <h1>Knowledge Base FAQ Management</h1>
           <p class="subtitle">Search and review support FAQs used by the student guidance knowledge base.</p>
         </div>
-        <div class="counter">
-          <span id="faqCount">0</span>
-          <small>FAQs</small>
+        <div class="counter-grid">
+          <div class="counter">
+            <span id="faqCount">0</span>
+            <small>FAQs</small>
+          </div>
+          <div class="counter">
+            <span id="publishedCount">0</span>
+            <small>Published</small>
+          </div>
+          <div class="counter">
+            <span id="draftCount">0</span>
+            <small>Drafts</small>
+          </div>
         </div>
       </section>
 
       <section class="panel">
         <label for="searchInput">Search FAQ library</label>
-        <input id="searchInput" type="search" placeholder="Search by question, category, answer, or tag" />
+        <div class="search-row">
+          <input id="searchInput" type="search" placeholder="Search by question, category, answer, status, or tag" />
+          <button type="button" class="secondary" id="refreshButton">Refresh</button>
+        </div>
       </section>
 
       <section class="panel">

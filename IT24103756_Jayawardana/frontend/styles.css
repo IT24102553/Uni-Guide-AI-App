@@ -56,6 +56,12 @@ h1 {
   text-align: center;
 }
 
+.counter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(96px, 1fr));
+  gap: 10px;
+}
+
 .counter span {
   display: block;
   color: #1f3f9d;
@@ -78,6 +84,12 @@ h1 {
 .panel {
   padding: 18px;
   margin-bottom: 16px;
+}
+
+.search-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 120px;
+  gap: 10px;
 }
 
 label {
@@ -172,6 +184,13 @@ button.secondary {
   line-height: 1.55;
 }
 
+.faq-meta {
+  margin-top: 12px;
+  color: #687385;
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .badge-row {
   display: flex;
   flex-wrap: wrap;
@@ -217,7 +236,12 @@ button.secondary {
   }
 
   .form-grid,
-  .actions {
+  .actions,
+  .search-row {
+    grid-template-columns: 1fr;
+  }
+
+  .counter-grid {
     grid-template-columns: 1fr;
   }
 }
