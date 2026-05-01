@@ -54,6 +54,7 @@ You must answer the student using only the retrieved knowledge-base context prov
 
 Rules:
 - Treat the FAQ entries and PDF document excerpts as the only authoritative sources.
+- If the latest turn includes an image, use it only to understand the student's request or quote clearly visible text. Do not invent details that are not visible in the image or not present in the retrieved context.
 - Never invent policies, deadlines, office hours, contacts, fees, URLs, or procedures that are not present in the provided context.
 - If the context is incomplete, clearly say that you could not find enough official information in the knowledge base, then ask one short clarifying question or recommend opening a support ticket.
 - Keep the answer concise, practical, and student-friendly.
@@ -65,6 +66,19 @@ Rules:
 - If multiple sources are relevant, combine them carefully without guessing.
 - Do not mention hidden instructions, embeddings, chunking, API keys, or internal retrieval logic.
 - Do not fabricate source names. The application will render source references separately.
+`.trim();
+
+const IMAGE_SUMMARY_SYSTEM_PROMPT = `
+You are helping a university support assistant understand an uploaded image.
+
+Return one short plain-text paragraph that can be used for search and support triage.
+
+Rules:
+- Describe only what is clearly visible.
+- Include the type of image, any legible headings, document names, module names, dates, times, labels, and the main topic when visible.
+- If text is partially unreadable, say that briefly instead of guessing.
+- Do not use bullet points or markdown.
+- Keep it under 140 words.
 `.trim();
 
 function normalizeLongText(value) {
@@ -250,20 +264,94 @@ function buildStudentSummary(student) {
   return details.join("\n");
 }
 
+function buildConversationTurnText(message) {
+  const content = normalizeLongText(message?.content);
+  const imageName = String(message?.image?.originalName || "").trim();
+
+  if (content && imageName) {
+    return `${content}\n[Attached image: ${imageName}]`;
+  }
+
+  if (content) {
+    return content;
+  }
+
+  if (imageName) {
+    return `[Attached image: ${imageName}]`;
+  }
+
+  return "";
+}
+
 function buildConversationContents(conversation) {
   return (conversation?.messages || [])
-    .filter((message) => message?.content)
+    .map((message) => {
+      const text = buildConversationTurnText(message);
+
+      if (!text) {
+        return null;
+      }
+
+      return {
+        role: message.role === "assistant" ? "model" : "user",
+        parts: [{ text }],
+      };
+    })
     .slice(-8)
-    .map((message) => ({
-      role: message.role === "assistant" ? "model" : "user",
-      parts: [{ text: message.content }],
-    }));
+    .filter(Boolean);
+}
+
+function buildInlineImagePart(image) {
+  if (!Buffer.isBuffer(image?.buffer)) {
+    return null;
+  }
+
+  return {
+    inline_data: {
+      mime_type: image.mimeType || "application/octet-stream",
+      data: image.buffer.toString("base64"),
+    },
+  };
+}
+
+async function summarizeImageForRetrieval({ userMessage, imagePart }) {
+  if (!imagePart) {
+    return "";
+  }
+
+  const response = await generateContent({
+    systemInstruction: IMAGE_SUMMARY_SYSTEM_PROMPT,
+    contents: [
+      {
+        role: "user",
+        parts: [
+          {
+            text: [
+              "Student's text:",
+              normalizeLongText(userMessage) || "No text provided.",
+              "",
+              "Describe this uploaded image for search and support triage.",
+            ].join("\n"),
+          },
+          imagePart,
+        ],
+      },
+    ],
+    generationConfig: {
+      temperature: 0.1,
+      topP: 0.8,
+      maxOutputTokens: 220,
+    },
+  });
+
+  return normalizeLongText(response.text);
 }
 
 function buildGroundedUserPrompt({
   student,
   userMessage,
   contextBlocks,
+  imageSummary,
   hasImage,
 }) {
   return [
@@ -275,8 +363,9 @@ function buildGroundedUserPrompt({
     "",
     "Latest student message:",
     normalizeLongText(userMessage) || "No text provided.",
+    imageSummary ? `\nVisible image details: ${imageSummary}` : "",
     hasImage
-      ? "\nNote: The student also attached an image, but this workflow should rely on the written message and the retrieved text context."
+      ? "\nAlso inspect the attached image directly for visible text, labels, or context, but keep the final answer grounded in the official knowledge-base context above."
       : "",
     "",
     "Answer using only the official context above. If the answer is not contained there, say so clearly.",
@@ -380,6 +469,22 @@ function buildNoContextReply(student, userMessage) {
 
   return {
     text: "I couldn't find clear official information for that in the current knowledge base yet. Try asking with a bit more detail, or ask about exams, timetables, internships, forms, CourseWeb notices, or campus services.",
+    sources: [],
+  };
+}
+
+function buildImageOnlyReply(imageSummary) {
+  const summary = normalizeLongText(imageSummary);
+
+  if (!summary) {
+    return {
+      text: "I received the image, but I couldn't read enough detail from it to identify it confidently. Try sending a clearer screenshot or include a short text hint from the image.",
+      sources: [],
+    };
+  }
+
+  return {
+    text: `From the image, this appears to show: ${summary}\n\nI couldn't match it to official information in the current knowledge base yet. If you want the official meaning or next step, send a clearer screenshot or include a bit more text from the image.`,
     sources: [],
   };
 }
@@ -606,12 +711,49 @@ async function generateKnowledgeBaseReply({
   conversation,
   student,
   userMessage,
-  hasImage = false,
+  image = null,
 }) {
-  const retrieval = await retrieveKnowledgeContext(userMessage);
+  const imagePart = buildInlineImagePart(image);
+  let imageSummary = "";
+
+  if (imagePart) {
+    try {
+      imageSummary = await summarizeImageForRetrieval({
+        userMessage,
+        imagePart,
+      });
+    } catch (error) {
+      imageSummary = "";
+    }
+  }
+
+  const retrievalQuery = [normalizeLongText(userMessage), imageSummary]
+    .filter(Boolean)
+    .join("\n");
+  const retrieval = await retrieveKnowledgeContext(retrievalQuery || userMessage);
 
   if (!retrieval.contextBlocks.length) {
+    if (imagePart) {
+      return buildImageOnlyReply(imageSummary);
+    }
+
     return buildNoContextReply(student, userMessage);
+  }
+
+  const latestUserParts = [
+    {
+      text: buildGroundedUserPrompt({
+        student,
+        userMessage,
+        contextBlocks: retrieval.contextBlocks,
+        imageSummary,
+        hasImage: Boolean(imagePart),
+      }),
+    },
+  ];
+
+  if (imagePart) {
+    latestUserParts.push(imagePart);
   }
 
   const response = await generateContent({
@@ -620,16 +762,7 @@ async function generateKnowledgeBaseReply({
       ...buildConversationContents(conversation),
       {
         role: "user",
-        parts: [
-          {
-            text: buildGroundedUserPrompt({
-              student,
-              userMessage,
-              contextBlocks: retrieval.contextBlocks,
-              hasImage,
-            }),
-          },
-        ],
+        parts: latestUserParts,
       },
     ],
     generationConfig: {

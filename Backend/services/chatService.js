@@ -289,7 +289,17 @@ async function sendMessage(conversationId, data) {
       conversation: conversationForModel,
       student,
       userMessage: content,
-      hasImage: Boolean(storedImage),
+      image: imageFile?.buffer
+        ? {
+            buffer: imageFile.buffer,
+            mimeType:
+              imageFile.mimetype ||
+              storedImage?.mimeType ||
+              "application/octet-stream",
+            originalName:
+              imageFile.originalname || storedImage?.originalName || "chat-image",
+          }
+        : null,
     });
   } catch (error) {
     assistantReply = {

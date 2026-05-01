@@ -448,11 +448,15 @@ export function StudentChatConversationScreen({ navigation, route }) {
       payload.append("content", content);
 
       if (draftImage) {
-        payload.append("image", {
-          uri: draftImage.uri,
-          name: draftImage.name || "chat-image.jpg",
-          type: draftImage.mimeType || "image/jpeg",
-        });
+        if (draftImage.file) {
+          payload.append("image", draftImage.file, draftImage.name || "chat-image.jpg");
+        } else {
+          payload.append("image", {
+            uri: draftImage.uri,
+            name: draftImage.name || "chat-image.jpg",
+            type: draftImage.mimeType || draftImage.type || "image/jpeg",
+          });
+        }
       }
 
       const data = await sendChatMessage(activeConversationId, payload);
