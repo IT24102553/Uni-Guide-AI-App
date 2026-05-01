@@ -55,6 +55,7 @@ You must answer the student using only the retrieved knowledge-base context prov
 Rules:
 - Treat the FAQ entries and PDF document excerpts as the only authoritative sources.
 - If the latest turn includes an image, use it only to understand the student's request or quote clearly visible text. Do not invent details that are not visible in the image or not present in the retrieved context.
+- If the latest user turn is only a greeting, thanks, farewell, or a brief question about your role, reply naturally and briefly instead of saying information was not found.
 - Never invent policies, deadlines, office hours, contacts, fees, URLs, or procedures that are not present in the provided context.
 - If the context is incomplete, clearly say that you could not find enough official information in the knowledge base, then ask one short clarifying question or recommend opening a support ticket.
 - Keep the answer concise, practical, and student-friendly.
@@ -382,7 +383,7 @@ function detectConversationalIntent(message) {
   }
 
   if (
-    /^(hi|hello|hey|hii|hiya|yo|good morning|good afternoon|good evening)\b/.test(
+    /^(hi|hello|hey|hii|hiya|yo|good morning|good afternoon|good evening)[!.?,\s]*$/.test(
       normalized
     )
   ) {
@@ -390,7 +391,7 @@ function detectConversationalIntent(message) {
   }
 
   if (
-    /(who are you|who r you|who are u|what are you|what r you|what are u|are you a bot|introduce yourself)/.test(
+    /^(who are you|who r you|who are u|what are you|what r you|what are u|are you a bot|introduce yourself)[!.?,\s]*$/.test(
       normalized
     )
   ) {
@@ -398,18 +399,18 @@ function detectConversationalIntent(message) {
   }
 
   if (
-    /(what can you do|how can you help|help me|can you help|what do you do)/.test(
+    /^(what can you do|how can you help|help me|can you help|what do you do)[!.?,\s]*$/.test(
       normalized
     )
   ) {
     return "capabilities";
   }
 
-  if (/^(thanks|thank you|thx|ty)\b/.test(normalized)) {
+  if (/^(thanks|thank you|thx|ty)[!.?,\s]*$/.test(normalized)) {
     return "thanks";
   }
 
-  if (/^(bye|goodbye|see you|cya)\b/.test(normalized)) {
+  if (/^(bye|goodbye|see you|cya)[!.?,\s]*$/.test(normalized)) {
     return "farewell";
   }
 
@@ -714,6 +715,14 @@ async function generateKnowledgeBaseReply({
   image = null,
 }) {
   const imagePart = buildInlineImagePart(image);
+  const directConversationalReply = imagePart
+    ? null
+    : buildConversationalReply(student, detectConversationalIntent(userMessage));
+
+  if (directConversationalReply) {
+    return directConversationalReply;
+  }
+
   let imageSummary = "";
 
   if (imagePart) {
