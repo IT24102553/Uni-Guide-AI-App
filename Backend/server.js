@@ -15,6 +15,7 @@ const analyticsLogRoutes = require("./routes/analyticsLogs");
 const announcementRoutes = require("./routes/announcements");
 const chatRoutes = require("./routes/chat");
 const knowledgeBaseRoutes = require("./routes/knowledgeBase");
+const ticketFeedbackRoutes = require("./routes/ticketFeedback");
 const ticketRoutes = require("./routes/tickets");
 const userRoutes = require("./routes/users");
 const { initializeRealtime } = require("./realtime/socket");
@@ -102,6 +103,7 @@ app.use("/analytics-logs", analyticsLogRoutes);
 app.use("/announcements", announcementRoutes);
 app.use("/chat", chatRoutes);
 app.use("/knowledge-base", knowledgeBaseRoutes);
+app.use("/tickets", ticketFeedbackRoutes);
 app.use("/tickets", ticketRoutes);
 app.use("/users", userRoutes);
 
