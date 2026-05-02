@@ -1,9 +1,14 @@
-const Ticket = require("../models/Ticket");
+const TicketFeedback = require("../models/TicketFeedback");
 const appError = require("../utils/appError");
 const {
   deleteStoredAttachments,
   storeAttachments,
 } = require("../utils/ticketAttachmentStore");
+const {
+  clearLegacyFeedbackForTicketIds,
+  getFeedbackForTicket,
+  migrateAllLegacyFeedbacks,
+} = require("./ticketFeedbackStore");
 const {
   FEEDBACK_ATTACHMENT_LIMIT,
   assertCanManageFeedback,
@@ -20,6 +25,12 @@ const {
   serializeTicket,
 } = require("./ticketSharedService");
 
+function toPlainAttachments(attachments = []) {
+  return (Array.isArray(attachments) ? attachments : []).map((attachment) =>
+    attachment?.toObject ? attachment.toObject() : attachment
+  );
+}
+
 async function upsertTicketFeedback(ticketId, data) {
   const viewer = await resolveViewer(data.viewerId, data.viewerRole);
   const ticket = await loadTicketOrThrow(ticketId);
@@ -27,12 +38,9 @@ async function upsertTicketFeedback(ticketId, data) {
 
   assertCanManageFeedback(ticket, viewer);
 
+  const currentFeedback = await getFeedbackForTicket(ticket);
   const removedAttachmentIds = new Set(normalizeIdList(data.removedAttachmentIds));
-  const currentAttachments = Array.isArray(ticket.feedback?.attachments)
-    ? ticket.feedback.attachments.map((attachment) =>
-        attachment?.toObject ? attachment.toObject() : attachment
-      )
-    : [];
+  const currentAttachments = toPlainAttachments(currentFeedback?.attachments);
   const attachmentsToRemove = currentAttachments.filter(
     (attachment) =>
       removedAttachmentIds.has(String(attachment.fileId || "")) ||
@@ -60,25 +68,28 @@ async function upsertTicketFeedback(ticketId, data) {
 
   try {
     const now = new Date();
-    const nextFeedback = {
-      ...(ticket.feedback?.toObject ? ticket.feedback.toObject() : ticket.feedback || {}),
-      rating: normalizeFeedbackRating(data.rating),
-      comment: normalizeFeedbackComment(data.comment),
-      attachments: [...remainingAttachments, ...uploadedAttachments],
-      submittedAt: ticket.feedback?.submittedAt || now,
-      updatedAt: now,
-    };
+    const feedback = currentFeedback || new TicketFeedback();
 
-    ticket.feedback = nextFeedback;
+    feedback.ticket = ticket._id;
+    feedback.student = ticket.student?._id || ticket.student;
+    feedback.rating = normalizeFeedbackRating(data.rating);
+    feedback.comment = normalizeFeedbackComment(data.comment);
+    feedback.attachments = [...remainingAttachments, ...uploadedAttachments];
+    feedback.submittedAt = currentFeedback?.submittedAt || now;
+    feedback.updatedAt = now;
 
+    await feedback.save();
+
+    ticket.updatedAt = now;
     await ticket.save();
+    await clearLegacyFeedbackForTicketIds([ticket._id]);
 
     if (attachmentsToRemove.length) {
       await deleteStoredAttachments(attachmentsToRemove).catch(() => undefined);
     }
 
     const updatedTicket = await loadTicketOrThrow(ticket._id);
-    return serializeTicket(updatedTicket, viewer.role);
+    return serializeTicket(updatedTicket, viewer.role, feedback);
   } catch (error) {
     await deleteStoredAttachments(uploadedAttachments).catch(() => undefined);
     throw error;
@@ -92,26 +103,27 @@ async function deleteTicketFeedback(ticketId, data) {
 
   assertCanManageFeedback(ticket, viewer);
 
-  if (!ticket.feedback?.rating) {
+  const currentFeedback = await getFeedbackForTicket(ticket);
+
+  if (!currentFeedback?.rating) {
     throw appError("No feedback has been submitted for this ticket yet", 404);
   }
 
-  const attachmentsToDelete = Array.isArray(ticket.feedback?.attachments)
-    ? ticket.feedback.attachments.map((attachment) =>
-        attachment?.toObject ? attachment.toObject() : attachment
-      )
-    : [];
+  const attachmentsToDelete = toPlainAttachments(currentFeedback.attachments);
+  const now = new Date();
 
-  ticket.feedback = null;
+  await TicketFeedback.deleteOne({ ticket: ticket._id });
 
+  ticket.updatedAt = now;
   await ticket.save();
+  await clearLegacyFeedbackForTicketIds([ticket._id]);
 
   if (attachmentsToDelete.length) {
     await deleteStoredAttachments(attachmentsToDelete).catch(() => undefined);
   }
 
   const updatedTicket = await loadTicketOrThrow(ticket._id);
-  return serializeTicket(updatedTicket, viewer.role);
+  return serializeTicket(updatedTicket, viewer.role, null);
 }
 
 async function getFeedbackDashboard(filters = {}) {
@@ -121,38 +133,45 @@ async function getFeedbackDashboard(filters = {}) {
     throw appError("Only admins can review ticket feedback", 403);
   }
 
-  const tickets = await Ticket.find({
-    "feedback.rating": { $exists: true },
-  })
-    .populate("student", "name email phone studentProfile")
-    .populate("assignedTo", "name email staffProfile")
-    .sort({ "feedback.updatedAt": -1, updatedAt: -1 });
+  await migrateAllLegacyFeedbacks();
+
+  const feedbackRecords = await TicketFeedback.find({})
+    .populate({
+      path: "ticket",
+      populate: [
+        { path: "student", select: "name email phone studentProfile" },
+        { path: "assignedTo", select: "name email staffProfile" },
+      ],
+    })
+    .sort({ updatedAt: -1, submittedAt: -1 });
 
   const breakdown = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
   let ratingTotal = 0;
 
-  const feedbacks = tickets.filter(isValidTicketRecord).map((ticket) => {
-    const rating = Number(ticket.feedback?.rating || 0);
+  const feedbacks = feedbackRecords
+    .filter((record) => record.ticket && isValidTicketRecord(record.ticket))
+    .map((record) => {
+      const rating = Number(record.rating || 0);
 
-    if (breakdown[rating] !== undefined) {
-      breakdown[rating] += 1;
-      ratingTotal += rating;
-    }
+      if (breakdown[rating] !== undefined) {
+        breakdown[rating] += 1;
+        ratingTotal += rating;
+      }
 
-    return {
-      ticketId: ticket._id,
-      ticketCode: ticket.ticketCode,
-      status: ticket.status,
-      priority: ticket.priority,
-      requestType: ticket.requestType,
-      requestSubType: ticket.requestSubType || "",
-      subject: ticket.subject,
-      student: formatStudentSnapshot(ticket),
-      assignedTo: formatAssignedTo(ticket),
-      feedback: formatTicketFeedback(ticket.feedback),
-      updatedAt: ticket.updatedAt,
-    };
-  });
+      return {
+        ticketId: record.ticket._id,
+        ticketCode: record.ticket.ticketCode,
+        status: record.ticket.status,
+        priority: record.ticket.priority,
+        requestType: record.ticket.requestType,
+        requestSubType: record.ticket.requestSubType || "",
+        subject: record.ticket.subject,
+        student: formatStudentSnapshot(record.ticket),
+        assignedTo: formatAssignedTo(record.ticket),
+        feedback: formatTicketFeedback(record),
+        updatedAt: record.updatedAt,
+      };
+    });
 
   const totalSubmissions = feedbacks.length;
   const averageRating = totalSubmissions ? Number((ratingTotal / totalSubmissions).toFixed(1)) : 0;

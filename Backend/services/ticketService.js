@@ -7,6 +7,11 @@ const {
   storeAttachments,
 } = require("../utils/ticketAttachmentStore");
 const {
+  findFeedbackByAttachmentFileId,
+  getFeedbackForTicket,
+  getFeedbackMapForTickets,
+} = require("./ticketFeedbackStore");
+const {
   PRIORITIES,
   STATUSES,
   assertCanViewTicket,
@@ -65,7 +70,8 @@ async function createTicket(data) {
 
     const hydratedTicket = await loadTicketOrThrow(ticket._id);
 
-    return serializeTicket(hydratedTicket, "student");
+    const feedback = await getFeedbackForTicket(hydratedTicket);
+    return serializeTicket(hydratedTicket, "student", feedback);
   } catch (error) {
     await deleteStoredAttachments(attachments).catch(() => undefined);
     throw error;
@@ -87,16 +93,18 @@ async function getTickets(filters = {}) {
     .populate("assignedTo", "name email staffProfile")
     .sort({ updatedAt: -1, createdAt: -1 });
 
-  return tickets
-    .filter((ticket) => {
-      try {
-        assertValidTicketRecord(ticket);
-        return true;
-      } catch (error) {
-        return false;
-      }
-    })
-    .map((ticket) => serializeTicket(ticket, viewer.role));
+  const visibleTickets = tickets.filter((ticket) => {
+    try {
+      assertValidTicketRecord(ticket);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  });
+  const feedbackMap = await getFeedbackMapForTickets(visibleTickets);
+
+  return visibleTickets
+    .map((ticket) => serializeTicket(ticket, viewer.role, feedbackMap.get(String(ticket._id)) || null));
 }
 
 async function getTicketById(ticketId, filters = {}) {
@@ -106,7 +114,8 @@ async function getTicketById(ticketId, filters = {}) {
 
   assertCanViewTicket(ticket, viewer);
 
-  return serializeTicket(ticket, viewer.role);
+  const feedback = await getFeedbackForTicket(ticket);
+  return serializeTicket(ticket, viewer.role, feedback);
 }
 
 async function updateTicket(ticketId, data) {
@@ -167,7 +176,8 @@ async function updateTicket(ticketId, data) {
   await ticket.save();
 
   const updatedTicket = await loadTicketOrThrow(ticket._id);
-  return serializeTicket(updatedTicket, viewer.role);
+  const feedback = await getFeedbackForTicket(updatedTicket);
+  return serializeTicket(updatedTicket, viewer.role, feedback);
 }
 
 async function addReply(ticketId, data) {
@@ -202,7 +212,8 @@ async function addReply(ticketId, data) {
     await ticket.save();
 
     const updatedTicket = await loadTicketOrThrow(ticket._id);
-    return serializeTicket(updatedTicket, viewer.role);
+    const feedback = await getFeedbackForTicket(updatedTicket);
+    return serializeTicket(updatedTicket, viewer.role, feedback);
   } catch (error) {
     await deleteStoredAttachments(attachments).catch(() => undefined);
     throw error;
@@ -217,15 +228,25 @@ async function getAttachmentDownloadForViewer(fileId, viewerId, viewerRole) {
   }
 
   const viewer = await resolveViewer(viewerId, viewerRole);
-  const ticket = await Ticket.findOne({
-    $or: [
-      { "attachments.fileId": normalizedFileId },
-      { "feedback.attachments.fileId": normalizedFileId },
-      { "replies.attachments.fileId": normalizedFileId },
-    ],
-  })
-    .populate("student", "name email phone studentProfile")
-    .populate("assignedTo", "name email staffProfile");
+  const feedback = await findFeedbackByAttachmentFileId(normalizedFileId);
+  let ticket = null;
+
+  if (feedback?.ticket) {
+    ticket = await Ticket.findById(feedback.ticket)
+      .populate("student", "name email phone studentProfile")
+      .populate("assignedTo", "name email staffProfile");
+  }
+
+  if (!ticket) {
+    ticket = await Ticket.findOne({
+      $or: [
+        { "attachments.fileId": normalizedFileId },
+        { "replies.attachments.fileId": normalizedFileId },
+      ],
+    })
+      .populate("student", "name email phone studentProfile")
+      .populate("assignedTo", "name email staffProfile");
+  }
 
   if (!ticket) {
     throw appError("Attachment not found", 404);

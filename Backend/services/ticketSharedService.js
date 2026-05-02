@@ -283,7 +283,7 @@ function assertValidTicketRecord(ticket) {
   }
 }
 
-function serializeTicket(ticket, viewerRole) {
+function serializeTicket(ticket, viewerRole, feedbackOverride = null) {
   const replies = formatReplies(ticket, viewerRole);
 
   return {
@@ -299,7 +299,7 @@ function serializeTicket(ticket, viewerRole) {
     status: ticket.status,
     student: formatStudentSnapshot(ticket),
     assignedTo: formatAssignedTo(ticket),
-    feedback: formatTicketFeedback(ticket.feedback),
+    feedback: formatTicketFeedback(feedbackOverride),
     replyCount: replies.length,
     replies,
     createdAt: ticket.createdAt,

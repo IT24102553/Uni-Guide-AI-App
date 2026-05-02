@@ -1,44 +1,5 @@
 const mongoose = require("mongoose");
-
-const ticketAttachmentSchema = new mongoose.Schema(
-  {
-    fileId: {
-      type: String,
-      trim: true,
-      default: "",
-    },
-    originalName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    storedName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    mimeType: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    size: {
-      type: Number,
-      required: true,
-      min: 0,
-    },
-    url: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    uploadedAt: {
-      type: Date,
-      default: Date.now,
-    },
-  },
-  { _id: true }
-);
+const ticketAttachmentSchema = require("./schemas/ticketAttachmentSchema");
 
 const ticketReplySchema = new mongoose.Schema(
   {
@@ -87,35 +48,6 @@ const ticketSnapshotSchema = new mongoose.Schema(
     contactNumber: { type: String, required: true, trim: true },
   },
   { _id: false }
-);
-
-const ticketFeedbackSchema = new mongoose.Schema(
-  {
-    rating: {
-      type: Number,
-      required: true,
-      min: 1,
-      max: 5,
-    },
-    comment: {
-      type: String,
-      trim: true,
-      default: "",
-    },
-    attachments: {
-      type: [ticketAttachmentSchema],
-      default: [],
-    },
-    submittedAt: {
-      type: Date,
-      default: Date.now,
-    },
-    updatedAt: {
-      type: Date,
-      default: Date.now,
-    },
-  },
-  { _id: true }
 );
 
 const ticketSchema = new mongoose.Schema(
@@ -188,10 +120,6 @@ const ticketSchema = new mongoose.Schema(
     replies: {
       type: [ticketReplySchema],
       default: [],
-    },
-    feedback: {
-      type: ticketFeedbackSchema,
-      default: null,
     },
   },
   { timestamps: true }
