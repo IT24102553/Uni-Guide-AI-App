@@ -138,16 +138,22 @@ function serializeConversation(conversation) {
 }
 
 function serializeConversationSummary(conversation) {
-  const serialized = serializeConversation(conversation);
+  const preview = normalizeLongText(
+    conversation?.lastMessagePreview || conversation?.lastMessage?.content || ""
+  );
+  const messageCount = Number(
+    conversation?.messageCount ||
+      (Array.isArray(conversation?.messages) ? conversation.messages.length : 0)
+  );
 
   return {
-    _id: serialized._id,
-    title: serialized.title,
-    lastMessagePreview: serialized.lastMessagePreview,
-    lastMessageAt: serialized.lastMessageAt,
-    messageCount: serialized.messageCount,
-    createdAt: serialized.createdAt,
-    updatedAt: serialized.updatedAt,
+    _id: conversation._id,
+    title: conversation.title,
+    lastMessagePreview: preview || "No messages yet",
+    lastMessageAt: conversation.lastMessageAt,
+    messageCount,
+    createdAt: conversation.createdAt,
+    updatedAt: conversation.updatedAt,
   };
 }
 
@@ -189,11 +195,36 @@ async function createConversation(data) {
 
 async function getConversations(filters = {}) {
   const student = await resolveStudent(filters.userId);
-  const conversations = await ChatConversation.find({ student: student._id }).sort({
-    lastMessageAt: -1,
-    updatedAt: -1,
-    createdAt: -1,
-  });
+  const conversations = await ChatConversation.aggregate([
+    {
+      $match: {
+        student: student._id,
+      },
+    },
+    {
+      $addFields: {
+        messageCount: { $size: { $ifNull: ["$messages", []] } },
+        lastMessage: { $arrayElemAt: ["$messages", -1] },
+      },
+    },
+    {
+      $project: {
+        title: 1,
+        lastMessageAt: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        messageCount: 1,
+        lastMessagePreview: "$lastMessage.content",
+      },
+    },
+    {
+      $sort: {
+        lastMessageAt: -1,
+        updatedAt: -1,
+        createdAt: -1,
+      },
+    },
+  ]);
 
   return conversations.map(serializeConversationSummary);
 }

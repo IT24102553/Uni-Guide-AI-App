@@ -1,7 +1,6 @@
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
 import { setApiAuthToken } from "../api/client";
 import {
-  connectRealtime,
   disconnectRealtime,
   setRealtimeAuthToken,
 } from "../realtime/socket";
@@ -22,10 +21,6 @@ export function SessionProvider({ children }) {
     setAuthTokenState(nextToken);
     setApiAuthToken(nextToken);
     setRealtimeAuthToken(nextToken);
-
-    if (nextToken) {
-      connectRealtime();
-    }
   }, []);
 
   const logout = useCallback(() => {

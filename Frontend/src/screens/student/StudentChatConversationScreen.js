@@ -85,6 +85,7 @@ export function StudentChatConversationScreen({ navigation, route }) {
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [deleteConversationId, setDeleteConversationId] = useState("");
   const [deleteConversationTitle, setDeleteConversationTitle] = useState("");
+  const [deletingConversation, setDeletingConversation] = useState(false);
   const [draftConversation, setDraftConversation] = useState(false);
   const streamRef = useRef(null);
   const scrollRef = useRef(null);
@@ -476,9 +477,13 @@ export function StudentChatConversationScreen({ navigation, route }) {
   }
 
   async function handleDeleteConversation(targetConversationId) {
-    if (!currentUser?._id || !targetConversationId) return;
+    if (!currentUser?._id || !targetConversationId || deletingConversation) return;
 
     try {
+      setDeletingConversation(true);
+      setDeleteVisible(false);
+      setDeleteConversationId("");
+      setDeleteConversationTitle("");
       setError("");
       await deleteChatConversation(targetConversationId, { userId: currentUser._id });
 
@@ -494,17 +499,15 @@ export function StudentChatConversationScreen({ navigation, route }) {
       } else {
         handleStartFresh();
       }
-
-      setDeleteVisible(false);
-      setDeleteConversationId("");
-      setDeleteConversationTitle("");
     } catch (requestError) {
       setError(requestError.message || "Unable to delete the conversation right now.");
+    } finally {
+      setDeletingConversation(false);
     }
   }
 
   function confirmDeleteConversation() {
-    if (!deleteConversationId) return;
+    if (!deleteConversationId || deletingConversation) return;
     void handleDeleteConversation(deleteConversationId);
   }
 
@@ -1017,14 +1020,21 @@ export function StudentChatConversationScreen({ navigation, route }) {
               <Text style={styles.modalBodyStrong}>{deleteConversationTitle}</Text> and its full chat history.
             </Text>
             <View style={styles.modalActions}>
-              <Pressable style={styles.modalGhostButton} onPress={() => setDeleteVisible(false)}>
+              <Pressable
+                style={styles.modalGhostButton}
+                onPress={() => setDeleteVisible(false)}
+                disabled={deletingConversation}
+              >
                 <Text style={styles.modalGhostText}>Cancel</Text>
               </Pressable>
               <Pressable
-                style={styles.modalDangerButton}
+                style={[styles.modalDangerButton, deletingConversation && styles.modalButtonDisabled]}
                 onPress={confirmDeleteConversation}
+                disabled={deletingConversation}
               >
-                <Text style={styles.modalDangerText}>Delete</Text>
+                <Text style={styles.modalDangerText}>
+                  {deletingConversation ? "Deleting..." : "Delete"}
+                </Text>
               </Pressable>
             </View>
           </View>
@@ -1749,6 +1759,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#ba1a1a",
     alignItems: "center",
     justifyContent: "center",
+  },
+  modalButtonDisabled: {
+    opacity: 0.65,
   },
   modalDangerText: {
     color: "white",

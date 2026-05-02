@@ -131,4 +131,11 @@ const chatConversationSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+chatConversationSchema.index({
+  student: 1,
+  lastMessageAt: -1,
+  updatedAt: -1,
+  createdAt: -1,
+});
+
 module.exports = mongoose.model("ChatConversation", chatConversationSchema);
