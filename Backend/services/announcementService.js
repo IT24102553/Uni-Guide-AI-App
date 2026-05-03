@@ -1,6 +1,7 @@
 const Announcement = require("../models/Announcement");
 const appError = require("../utils/appError");
 const {
+  buildAttachmentUrl,
   deleteStoredAttachments,
   getAttachmentDownload,
   storeAttachments,
@@ -12,6 +13,7 @@ const VIEWER_ROLES = ["student", "staff", "admin"];
 const TITLE_LIMIT = 120;
 const CONTENT_LIMIT = 2000;
 const ANNOUNCEMENT_ATTACHMENT_BUCKET_NAME = "announcementAttachments";
+const ANNOUNCEMENT_ATTACHMENT_URL_PATH = "/announcements/attachments";
 
 function normalizeString(value) {
   return String(value || "")
@@ -167,7 +169,9 @@ function formatAttachments(attachments = []) {
     storedName: attachment.storedName,
     mimeType: attachment.mimeType,
     size: attachment.size,
-    url: attachment.url,
+    url: attachment.fileId
+      ? buildAttachmentUrl(attachment.fileId, ANNOUNCEMENT_ATTACHMENT_URL_PATH)
+      : attachment.url,
     uploadedAt: attachment.uploadedAt,
   }));
 }
@@ -353,7 +357,10 @@ async function createAnnouncement(data) {
       title: payload.title,
       targetAudience: payload.targetAudience,
     },
-    { bucketName: ANNOUNCEMENT_ATTACHMENT_BUCKET_NAME }
+    {
+      bucketName: ANNOUNCEMENT_ATTACHMENT_BUCKET_NAME,
+      urlPath: ANNOUNCEMENT_ATTACHMENT_URL_PATH,
+    }
   );
 
   try {
@@ -402,7 +409,10 @@ async function updateAnnouncement(id, data) {
       title: payload.title,
       targetAudience: payload.targetAudience,
     },
-    { bucketName: ANNOUNCEMENT_ATTACHMENT_BUCKET_NAME }
+    {
+      bucketName: ANNOUNCEMENT_ATTACHMENT_BUCKET_NAME,
+      urlPath: ANNOUNCEMENT_ATTACHMENT_URL_PATH,
+    }
   );
 
   try {

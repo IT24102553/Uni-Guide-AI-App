@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const appError = require("./appError");
 
 const ATTACHMENT_BUCKET_NAME = "ticketAttachments";
+const DEFAULT_ATTACHMENT_URL_PATH = "/tickets/attachments";
 
 function sanitizeBaseName(filename) {
   return String(filename || "")
@@ -32,6 +33,19 @@ function getAttachmentBucket(bucketName = ATTACHMENT_BUCKET_NAME) {
   return new mongoose.mongo.GridFSBucket(db, {
     bucketName,
   });
+}
+
+function buildAttachmentUrl(fileId, urlPath = DEFAULT_ATTACHMENT_URL_PATH) {
+  const normalizedFileId = String(fileId || "").trim();
+  const normalizedUrlPath = String(urlPath || DEFAULT_ATTACHMENT_URL_PATH)
+    .trim()
+    .replace(/\/+$/, "");
+
+  if (!normalizedFileId) {
+    return normalizedUrlPath || DEFAULT_ATTACHMENT_URL_PATH;
+  }
+
+  return `${normalizedUrlPath || DEFAULT_ATTACHMENT_URL_PATH}/${normalizedFileId}`;
 }
 
 async function uploadAttachment(file, metadata = {}, options = {}) {
@@ -62,7 +76,7 @@ async function uploadAttachment(file, metadata = {}, options = {}) {
           storedName,
           mimeType: file.mimetype || "application/octet-stream",
           size: Number(file.size || file.buffer.length || 0),
-          url: `/tickets/attachments/${uploadStream.id}`,
+          url: buildAttachmentUrl(uploadStream.id, options.urlPath),
           uploadedAt: new Date(),
         });
       });
@@ -123,6 +137,8 @@ async function getAttachmentDownload(fileId, options = {}) {
 
 module.exports = {
   ATTACHMENT_BUCKET_NAME,
+  DEFAULT_ATTACHMENT_URL_PATH,
+  buildAttachmentUrl,
   deleteStoredAttachments,
   getAttachmentDownload,
   storeAttachments,

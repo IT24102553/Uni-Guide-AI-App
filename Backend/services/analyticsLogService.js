@@ -6,6 +6,7 @@ const Ticket = require("../models/Ticket");
 const User = require("../models/User");
 const appError = require("../utils/appError");
 const {
+  buildAttachmentUrl,
   deleteStoredAttachments,
   getAttachmentDownload,
   storeAttachments,
@@ -21,6 +22,7 @@ const NOTES_LIMIT = 4000;
 const OPEN_TICKET_STATUSES = ["New", "In Progress", "Escalated"];
 const RESOLVED_TICKET_STATUSES = ["Resolved", "Closed"];
 const URGENT_TICKET_PRIORITIES = ["High", "Urgent"];
+const ANALYTICS_LOG_ATTACHMENT_URL_PATH = "/analytics-logs/attachments";
 
 function normalizeString(value) {
   return String(value || "")
@@ -149,7 +151,9 @@ function formatAttachments(attachments = []) {
     storedName: attachment.storedName,
     mimeType: attachment.mimeType,
     size: attachment.size,
-    url: attachment.url,
+    url: attachment.fileId
+      ? buildAttachmentUrl(attachment.fileId, ANALYTICS_LOG_ATTACHMENT_URL_PATH)
+      : attachment.url,
     uploadedAt: attachment.uploadedAt,
   }));
 }
@@ -391,7 +395,10 @@ async function createRecord(data) {
       category: payload.category,
       severity: payload.severity,
     },
-    { bucketName: ANALYTICS_LOG_ATTACHMENT_BUCKET_NAME }
+    {
+      bucketName: ANALYTICS_LOG_ATTACHMENT_BUCKET_NAME,
+      urlPath: ANALYTICS_LOG_ATTACHMENT_URL_PATH,
+    }
   );
 
   try {
@@ -442,7 +449,10 @@ async function updateRecord(id, data) {
       category: payload.category,
       severity: payload.severity,
     },
-    { bucketName: ANALYTICS_LOG_ATTACHMENT_BUCKET_NAME }
+    {
+      bucketName: ANALYTICS_LOG_ATTACHMENT_BUCKET_NAME,
+      urlPath: ANALYTICS_LOG_ATTACHMENT_URL_PATH,
+    }
   );
 
   try {
