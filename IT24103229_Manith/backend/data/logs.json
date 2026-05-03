@@ -1,0 +1,41 @@
+[
+  {
+    "id": "log-001",
+    "title": "Dashboard latency spike",
+    "category": "incident",
+    "severity": "High",
+    "status": "Open",
+    "source": "Admin Dashboard",
+    "notes": "Users reported slower loading times when opening the analytics overview during peak hours.",
+    "eventDate": "2026-04-29T09:30:00.000Z",
+    "reportedByName": "Manith Fernando",
+    "createdAt": "2026-04-29T09:35:00.000Z",
+    "updatedAt": "2026-04-29T09:35:00.000Z"
+  },
+  {
+    "id": "log-002",
+    "title": "Invalid login attempts review",
+    "category": "security",
+    "severity": "Critical",
+    "status": "In Review",
+    "source": "Authentication Module",
+    "notes": "Repeated failed logins were detected from a single IP range and flagged for admin review.",
+    "eventDate": "2026-04-23T12:00:00.000Z",
+    "reportedByName": "Manith Fernando",
+    "createdAt": "2026-04-23T12:10:00.000Z",
+    "updatedAt": "2026-04-23T12:10:00.000Z"
+  },
+  {
+    "id": "log-003",
+    "title": "Usage report prepared",
+    "category": "report",
+    "severity": "Medium",
+    "status": "Resolved",
+    "source": "System Metrics",
+    "notes": "Weekly analytics summary was generated and verified for submission screenshots.",
+    "eventDate": "2026-04-19T15:45:00.000Z",
+    "reportedByName": "Manith Fernando",
+    "createdAt": "2026-04-19T15:50:00.000Z",
+    "updatedAt": "2026-04-19T16:20:00.000Z"
+  }
+]

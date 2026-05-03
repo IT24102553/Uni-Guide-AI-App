@@ -1,0 +1,302 @@
+:root {
+  --bg: #f3efe6;
+  --surface: rgba(255, 255, 255, 0.94);
+  --surface-strong: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --line: #e5ded2;
+  --accent: #0f766e;
+  --accent-strong: #115e59;
+  --danger: #b91c1c;
+  --warning: #b45309;
+  --success: #166534;
+  --shadow: 0 20px 60px rgba(24, 39, 75, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(15, 118, 110, 0.18), transparent 28%),
+    radial-gradient(circle at right, rgba(194, 120, 3, 0.14), transparent 24%),
+    linear-gradient(180deg, #f7f1e8 0%, #efe7db 100%);
+  min-height: 100vh;
+}
+
+.page-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.auth-card {
+  max-width: 520px;
+  margin: 48px auto;
+}
+
+.topbar,
+.dashboard-grid,
+.metrics-grid,
+.button-row,
+.filter-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.topbar {
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  margin-bottom: 20px;
+}
+
+.dashboard-grid {
+  grid-template-columns: 1.05fr 1fr;
+  margin-top: 18px;
+}
+
+.metrics-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.filter-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.form-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.form-grid.compact {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #d8d3ca;
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: var(--surface-strong);
+  color: var(--text);
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover {
+  background: var(--accent-strong);
+}
+
+.ghost-button {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid #d2c8bb;
+}
+
+.ghost-button:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.eyebrow {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2 {
+  margin-top: 8px;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.05;
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+.muted {
+  color: var(--muted);
+  line-height: 1.7;
+  margin-top: 10px;
+}
+
+.demo-box,
+.metric-card,
+.record-card,
+.activity-card {
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.demo-box {
+  display: grid;
+  gap: 4px;
+  padding: 16px;
+  margin: 18px 0 20px;
+}
+
+.metric-card {
+  padding: 18px;
+}
+
+.metric-label {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.metric-value {
+  font-size: 32px;
+  font-weight: 800;
+  margin-top: 10px;
+}
+
+.message {
+  min-height: 20px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.message.error {
+  color: var(--danger);
+}
+
+.message.success {
+  color: var(--success);
+}
+
+.list-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.record-card,
+.activity-card {
+  padding: 16px;
+}
+
+.record-top,
+.activity-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+}
+
+.pill-row,
+.meta-row,
+.record-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.pill.status {
+  background: #dff5f2;
+  color: #115e59;
+}
+
+.pill.severity {
+  background: #fff1db;
+  color: #9a5b00;
+}
+
+.pill.severity-critical {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.record-actions button {
+  padding: 9px 14px;
+}
+
+.danger-button {
+  background: #b91c1c;
+}
+
+.danger-button:hover {
+  background: #991b1b;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .dashboard-grid,
+  .metrics-grid,
+  .filter-grid,
+  .form-grid.compact,
+  .topbar {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "login-001",
+    "email": "admin@my.sliit.lk",
+    "status": "success",
+    "message": "Seeded admin login record",
+    "createdAt": "2026-04-29T08:15:00.000Z"
+  },
+  {
+    "id": "login-002",
+    "email": "unknown@my.sliit.lk",
+    "status": "failed",
+    "message": "Unknown account",
+    "createdAt": "2026-04-23T10:20:00.000Z"
+  },
+  {
+    "id": "login-003",
+    "email": "admin@my.sliit.lk",
+    "status": "success",
+    "message": "Dashboard access",
+    "createdAt": "2026-04-19T14:05:00.000Z"
+  },
+  {
+    "id": "login-1777844044345-h2fx2c",
+    "email": "admin@my.sliit.lk",
+    "status": "success",
+    "message": "Login successful",
+    "createdAt": "2026-05-03T21:34:04.345Z"
+  },
+  {
+    "id": "login-1777844044406-0o65jx",
+    "email": "wrong@my.sliit.lk",
+    "status": "failed",
+    "message": "Unknown account",
+    "createdAt": "2026-05-03T21:34:04.406Z"
+  },
+  {
+    "id": "login-1777844053266-jkr8jz",
+    "email": "admin@my.sliit.lk",
+    "status": "success",
+    "message": "Login successful",
+    "createdAt": "2026-05-03T21:34:13.266Z"
+  }
+]
