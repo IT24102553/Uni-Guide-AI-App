@@ -179,6 +179,22 @@ function assertCanViewTicket(ticket, viewer) {
   throw appError("You do not have access to this ticket", 403);
 }
 
+function assertCanDeleteTicket(ticket, viewer) {
+  if (viewer.role === "admin") {
+    return;
+  }
+
+  if (viewer.role === "student" && studentOwnsTicket(ticket, viewer._id)) {
+    if (ticket.status !== "New") {
+      throw appError("Students can only delete their own tickets while the status is New", 400);
+    }
+
+    return;
+  }
+
+  throw appError("You do not have permission to delete this ticket", 403);
+}
+
 function formatAttachments(attachments) {
   return (Array.isArray(attachments) ? attachments : []).map((attachment) => ({
     _id: attachment._id,
@@ -386,6 +402,7 @@ module.exports = {
   PRIORITIES,
   STATUSES,
   assertCanManageFeedback,
+  assertCanDeleteTicket,
   assertCanViewTicket,
   assertValidTicketRecord,
   buildTicketSnapshot,

@@ -94,6 +94,23 @@ async function addReply(req, res) {
   }
 }
 
+async function deleteTicket(req, res) {
+  try {
+    const ticket = await ticketService.deleteTicket(req.params.id, {
+      viewerId: req.user._id,
+      viewerRole: req.user.role,
+    });
+    notifyTicketChanged(ticket);
+
+    res.status(200).json({
+      message: "Ticket deleted successfully",
+      ticket,
+    });
+  } catch (error) {
+    sendError(res, error, "Error deleting ticket");
+  }
+}
+
 function sanitizeContentDispositionName(filename) {
   return String(filename || "attachment").replace(/["\r\n\\]+/g, "_");
 }
@@ -137,5 +154,6 @@ module.exports = {
   getTicketById,
   updateTicket,
   addReply,
+  deleteTicket,
   downloadAttachment,
 };

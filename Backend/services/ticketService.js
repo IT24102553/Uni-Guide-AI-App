@@ -1,5 +1,6 @@
 const crypto = require("crypto");
 const Ticket = require("../models/Ticket");
+const TicketFeedback = require("../models/TicketFeedback");
 const appError = require("../utils/appError");
 const {
   deleteStoredAttachments,
@@ -14,6 +15,7 @@ const {
 const {
   PRIORITIES,
   STATUSES,
+  assertCanDeleteTicket,
   assertCanViewTicket,
   assertValidTicketRecord,
   buildTicketSnapshot,
@@ -26,6 +28,21 @@ const {
   resolveViewer,
   serializeTicket,
 } = require("./ticketSharedService");
+
+function toPlainAttachments(attachments = []) {
+  return (Array.isArray(attachments) ? attachments : []).map((attachment) =>
+    attachment?.toObject ? attachment.toObject() : attachment
+  );
+}
+
+function collectTicketAttachments(ticket) {
+  const rootAttachments = toPlainAttachments(ticket?.attachments);
+  const replyAttachments = (Array.isArray(ticket?.replies) ? ticket.replies : []).flatMap((reply) =>
+    toPlainAttachments(reply?.attachments)
+  );
+
+  return [...rootAttachments, ...replyAttachments];
+}
 
 async function generateTicketCode() {
   for (let index = 0; index < 5; index += 1) {
@@ -220,6 +237,27 @@ async function addReply(ticketId, data) {
   }
 }
 
+async function deleteTicket(ticketId, data) {
+  const viewer = await resolveViewer(data.viewerId, data.viewerRole);
+  const ticket = await loadTicketOrThrow(ticketId);
+  const feedback = await getFeedbackForTicket(ticket);
+  const attachmentsToDelete = [
+    ...collectTicketAttachments(ticket),
+    ...toPlainAttachments(feedback?.attachments),
+  ];
+
+  assertCanDeleteTicket(ticket, viewer);
+
+  await Ticket.deleteOne({ _id: ticket._id });
+  await TicketFeedback.deleteOne({ ticket: ticket._id });
+
+  if (attachmentsToDelete.length) {
+    await deleteStoredAttachments(attachmentsToDelete).catch(() => undefined);
+  }
+
+  return serializeTicket(ticket, viewer.role, feedback);
+}
+
 async function getAttachmentDownloadForViewer(fileId, viewerId, viewerRole) {
   const normalizedFileId = normalizeOptionalString(fileId);
 
@@ -264,4 +302,5 @@ module.exports = {
   getTicketById,
   updateTicket,
   addReply,
+  deleteTicket,
 };

@@ -56,6 +56,14 @@ export function updateSupportTicket(ticketId, payload) {
   });
 }
 
+export function deleteSupportTicket(ticketId, payload) {
+  return requestApi(`/tickets/${ticketId}`, {
+    method: "DELETE",
+    body: payload,
+    fallbackMessage: "Unable to delete the ticket right now",
+  });
+}
+
 export function saveTicketFeedback(ticketId, payload, attachments = []) {
   return requestApi(`/tickets/${ticketId}/feedback`, {
     method: "PUT",

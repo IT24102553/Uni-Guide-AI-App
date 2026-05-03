@@ -27,6 +27,10 @@ export function replaceTicket(collection, nextTicket) {
   return collection.map((ticket) => (ticketId(ticket) === id ? nextTicket : ticket));
 }
 
+export function removeTicket(collection, targetTicketId) {
+  return collection.filter((ticket) => ticketId(ticket) !== String(targetTicketId || ""));
+}
+
 export function formatDateTime(value) {
   if (!value) {
     return "";

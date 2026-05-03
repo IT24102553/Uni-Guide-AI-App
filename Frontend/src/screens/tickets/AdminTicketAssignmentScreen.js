@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AdminShell } from "../../components/AdminShell";
 import { useSession } from "../../context/SessionContext";
 import { fetchUsers } from "../../api/users";
-import { fetchTicketById, sendTicketReply, updateSupportTicket } from "../../api/tickets";
+import { deleteSupportTicket, fetchTicketById, sendTicketReply, updateSupportTicket } from "../../api/tickets";
 import { colors, layout, type } from "../../theme";
 import { AttachmentList, AttachmentPickerField } from "./TicketAttachmentSection";
 import { pickAttachments, removePendingAttachment } from "./attachmentUtils";
@@ -14,6 +14,7 @@ import {
   formatDateTime,
   groupStaffByDepartment,
   normalizeString,
+  removeTicket,
   replaceTicket,
   ticketId,
   useTickets,
@@ -319,6 +320,50 @@ export function AdminTicketAssignmentScreen({ navigation, route }) {
     }
   }
 
+  async function deleteTicket() {
+    if (!selectedTicket) return;
+
+    try {
+      setBusy(true);
+      await deleteSupportTicket(ticketId(selectedTicket), {
+        viewerId: currentUser._id,
+        viewerRole: currentUser.role,
+      });
+      setTickets((current) => removeTicket(current, ticketId(selectedTicket)));
+      setSelectedTicketId("");
+      setReplyText("");
+      setReplyAttachments([]);
+      setInternalNote("");
+      setAssignOpen(false);
+      setFeedback({ type: "success", message: "Ticket deleted successfully." });
+    } catch (error) {
+      setFeedback({ type: "error", message: error.message || "Unable to delete the ticket right now." });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function confirmDeleteTicket() {
+    if (!selectedTicket || busy) {
+      return;
+    }
+
+    Alert.alert(
+      "Delete ticket?",
+      "This will permanently remove the ticket, replies, feedback, and attachments.",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => {
+            void deleteTicket();
+          },
+        },
+      ]
+    );
+  }
+
   async function handlePickReplyAttachments() {
     const result = await pickAttachments(replyAttachments);
     setReplyAttachments(result.attachments);
@@ -364,6 +409,13 @@ export function AdminTicketAssignmentScreen({ navigation, route }) {
               <Pressable style={styles.backButton} onPress={() => setSelectedTicketId("")}>
                 <MaterialIcons name="arrow-back" size={18} color={colors.primary} />
                 <Text style={styles.backButtonText}>Back to Queue</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.deleteButton, busy && styles.disabled]}
+                onPress={confirmDeleteTicket}
+                disabled={busy}
+              >
+                <Text style={styles.deleteButtonText}>{busy ? "Working..." : "Delete Ticket"}</Text>
               </Pressable>
             </View>
             <Text style={styles.detailHeading}>{selectedTicket.ticketCode}</Text>
@@ -614,6 +666,8 @@ const styles = StyleSheet.create({
   primaryButtonText: { color: "white", fontWeight: "800" },
   secondaryButton: { minHeight: layout.touchTarget, borderRadius: layout.pillRadius, borderWidth: 1, borderColor: colors.outline, alignItems: "center", justifyContent: "center", paddingHorizontal: 16, backgroundColor: "white" },
   secondaryButtonText: { color: colors.primary, fontWeight: "800" },
+  deleteButton: { minHeight: layout.touchTarget, borderRadius: layout.pillRadius, borderWidth: 1, borderColor: "#f0b5bf", alignItems: "center", justifyContent: "center", paddingHorizontal: 14, backgroundColor: "#fff1f3" },
+  deleteButtonText: { color: "#b42318", fontWeight: "800" },
   detailHeading: { color: colors.primary, fontSize: type.h2, fontWeight: "800" },
   sectionLabel: { color: colors.primary, fontSize: 14, fontWeight: "800" },
   detailLine: { flexDirection: "row", justifyContent: "space-between", gap: 12 },

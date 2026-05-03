@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AppBrandHeader } from "../../components/AppBrandHeader";
 import { useSession } from "../../context/SessionContext";
 import {
   createSupportTicket,
+  deleteSupportTicket,
   deleteTicketFeedback,
   fetchTicketById,
   saveTicketFeedback,
@@ -27,6 +28,7 @@ import {
   emptyFeedback,
   formatDateTime,
   normalizeString,
+  removeTicket,
   replaceTicket,
   ticketId,
   useTickets,
@@ -230,6 +232,7 @@ export function StudentTicketCenterScreen({ navigation, route }) {
   const [replyAttachments, setReplyAttachments] = useState([]);
   const [replyBusy, setReplyBusy] = useState(false);
   const [closeBusy, setCloseBusy] = useState(false);
+  const [deleteBusy, setDeleteBusy] = useState(false);
   const [feedbackForm, setFeedbackForm] = useState(createFeedbackForm());
   const [feedbackExistingAttachments, setFeedbackExistingAttachments] = useState([]);
   const [feedbackPendingAttachments, setFeedbackPendingAttachments] = useState([]);
@@ -313,6 +316,7 @@ export function StudentTicketCenterScreen({ navigation, route }) {
     feedbackEditing ||
     Boolean(selectedTicket?.feedback) ||
     isFeedbackEligibleStatus(selectedTicket?.status);
+  const canDeleteSelectedTicket = selectedTicket?.status === "New";
 
   function updateForm(key, value) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -461,6 +465,49 @@ export function StudentTicketCenterScreen({ navigation, route }) {
     } finally {
       setCloseBusy(false);
     }
+  }
+
+  async function deleteTicket() {
+    if (!selectedTicket) return;
+
+    try {
+      setDeleteBusy(true);
+      await deleteSupportTicket(ticketId(selectedTicket), {
+        viewerId: currentUser._id,
+        viewerRole: currentUser.role,
+      });
+      setTickets((current) => removeTicket(current, ticketId(selectedTicket)));
+      setSelectedTicketId("");
+      setReplyText("");
+      setReplyAttachments([]);
+      setMode("list");
+      setFeedback({ type: "success", message: "Ticket deleted successfully." });
+    } catch (error) {
+      setFeedback({ type: "error", message: error.message || "Unable to delete the ticket right now." });
+    } finally {
+      setDeleteBusy(false);
+    }
+  }
+
+  function confirmDeleteTicket() {
+    if (!selectedTicket || !canDeleteSelectedTicket || deleteBusy) {
+      return;
+    }
+
+    Alert.alert(
+      "Delete ticket?",
+      "This will permanently remove the ticket and its attachments. This action cannot be undone.",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => {
+            void deleteTicket();
+          },
+        },
+      ]
+    );
   }
 
   async function saveFeedback() {
@@ -662,11 +709,22 @@ export function StudentTicketCenterScreen({ navigation, route }) {
                 <MaterialIcons name="arrow-back" size={18} color={colors.primary} />
                 <Text style={styles.backButtonText}>Back to My Tickets</Text>
               </Pressable>
-              {selectedTicket.status === "Resolved" ? (
-                <Pressable style={[styles.secondaryButton, closeBusy && styles.disabled]} onPress={() => void closeTicket()} disabled={closeBusy}>
-                  <Text style={styles.secondaryButtonText}>{closeBusy ? "Closing..." : "Close Ticket"}</Text>
-                </Pressable>
-              ) : null}
+              <View style={styles.inlineActionRow}>
+                {canDeleteSelectedTicket ? (
+                  <Pressable
+                    style={[styles.textActionButton, deleteBusy && styles.disabled]}
+                    onPress={confirmDeleteTicket}
+                    disabled={deleteBusy}
+                  >
+                    <Text style={styles.textActionButtonLabel}>{deleteBusy ? "Deleting..." : "Delete Ticket"}</Text>
+                  </Pressable>
+                ) : null}
+                {selectedTicket.status === "Resolved" ? (
+                  <Pressable style={[styles.secondaryButton, closeBusy && styles.disabled]} onPress={() => void closeTicket()} disabled={closeBusy}>
+                    <Text style={styles.secondaryButtonText}>{closeBusy ? "Closing..." : "Close Ticket"}</Text>
+                  </Pressable>
+                ) : null}
+              </View>
             </View>
             <Text style={styles.detailHeading}>{selectedTicket.ticketCode}</Text>
             <View style={styles.badgeRow}>
