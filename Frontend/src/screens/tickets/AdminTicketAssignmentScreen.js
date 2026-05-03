@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Alert, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AdminShell } from "../../components/AdminShell";
@@ -165,6 +165,30 @@ function FeedbackRating({ rating }) {
       ))}
     </View>
   );
+}
+
+function confirmAction(title, message, onConfirm) {
+  if (Platform.OS === "web") {
+    const confirmDialog =
+      typeof globalThis.confirm === "function"
+        ? globalThis.confirm(`${title}\n\n${message}`)
+        : true;
+
+    if (confirmDialog) {
+      onConfirm();
+    }
+
+    return;
+  }
+
+  Alert.alert(title, message, [
+    { text: "Cancel", style: "cancel" },
+    {
+      text: "Delete",
+      style: "destructive",
+      onPress: onConfirm,
+    },
+  ]);
 }
 
 export function AdminTicketAssignmentScreen({ navigation, route }) {
@@ -348,19 +372,12 @@ export function AdminTicketAssignmentScreen({ navigation, route }) {
       return;
     }
 
-    Alert.alert(
+    confirmAction(
       "Delete ticket?",
       "This will permanently remove the ticket, replies, feedback, and attachments.",
-      [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: () => {
-            void deleteTicket();
-          },
-        },
-      ]
+      () => {
+        void deleteTicket();
+      }
     );
   }
 

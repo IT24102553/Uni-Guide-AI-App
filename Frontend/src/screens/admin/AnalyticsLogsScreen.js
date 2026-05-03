@@ -52,11 +52,49 @@ const LOG_STATUSES = [
   { value: "Archived", label: "Archived" },
 ];
 
-function todayInputValue() {
+function previousDateInputValue() {
+  const date = new Date();
+  date.setDate(date.getDate() - 1);
+  return dateInputValue(date);
+}
+
+function dateInputValue(date) {
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${date.getFullYear()}-${month}-${day}`;
+}
+
+function isPreviousDateInput(value) {
+  const trimmedValue = clean(value);
+
+  if (!trimmedValue) {
+    return false;
+  }
+
+  const match = trimmedValue.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+
+  if (!match) {
+    return false;
+  }
+
+  const selectedDate = new Date(
+    Number(match[1]),
+    Number(match[2]) - 1,
+    Number(match[3])
+  );
+
+  if (
+    Number.isNaN(selectedDate.getTime()) ||
+    selectedDate.getFullYear() !== Number(match[1]) ||
+    selectedDate.getMonth() !== Number(match[2]) - 1 ||
+    selectedDate.getDate() !== Number(match[3])
+  ) {
+    return false;
+  }
+
   const today = new Date();
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const day = String(today.getDate()).padStart(2, "0");
-  return `${today.getFullYear()}-${month}-${day}`;
+  const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  return selectedDate < todayStart;
 }
 
 function emptyForm() {
@@ -66,7 +104,7 @@ function emptyForm() {
     severity: "Medium",
     status: "Open",
     source: "",
-    eventDate: todayInputValue(),
+    eventDate: previousDateInputValue(),
     notes: "",
   };
 }
@@ -90,11 +128,9 @@ function formatDateTime(value) {
 
 function formatInputDate(value) {
   const date = value ? new Date(value) : null;
-  if (!date || Number.isNaN(date.getTime())) return todayInputValue();
+  if (!date || Number.isNaN(date.getTime())) return previousDateInputValue();
 
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${date.getFullYear()}-${month}-${day}`;
+  return dateInputValue(date);
 }
 
 function getCategoryLabel(value) {
@@ -210,6 +246,9 @@ export function AnalyticsLogsScreen({ navigation }) {
   function validateForm() {
     if (!clean(form.title)) return "Title is required.";
     if (!clean(form.eventDate)) return "Event date is required.";
+    if (!isPreviousDateInput(form.eventDate)) {
+      return "Event date must be a valid date before today.";
+    }
     if (!clean(form.notes)) return "Notes are required.";
     return "";
   }
@@ -600,7 +639,10 @@ export function AnalyticsLogsScreen({ navigation }) {
               placeholder="YYYY-MM-DD"
               placeholderTextColor="#8b8f99"
               autoCapitalize="none"
+              autoCorrect={false}
+              maxLength={10}
             />
+            <Text style={styles.fieldHint}>Use a previous date only in YYYY-MM-DD format.</Text>
 
             <FieldLabel label="Incident Type" />
             <View style={styles.chipRow}>
@@ -1113,6 +1155,7 @@ const styles = StyleSheet.create({
   },
   editingBadgeText: { color: colors.primary, fontSize: 11, fontWeight: "800", textTransform: "uppercase" },
   fieldLabel: { color: colors.textMuted, fontSize: 12, fontWeight: "700", marginTop: 2 },
+  fieldHint: { color: "#6b7280", fontSize: 11, lineHeight: 16, marginTop: -2 },
   input: {
     minHeight: 48,
     borderRadius: 14,

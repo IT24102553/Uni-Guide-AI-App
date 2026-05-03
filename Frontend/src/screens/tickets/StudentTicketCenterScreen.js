@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Alert, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AppBrandHeader } from "../../components/AppBrandHeader";
@@ -217,6 +217,30 @@ function FeedbackRatingInput({ rating, onChange, disabled = false }) {
       })}
     </View>
   );
+}
+
+function confirmAction(title, message, onConfirm) {
+  if (Platform.OS === "web") {
+    const confirmDialog =
+      typeof globalThis.confirm === "function"
+        ? globalThis.confirm(`${title}\n\n${message}`)
+        : true;
+
+    if (confirmDialog) {
+      onConfirm();
+    }
+
+    return;
+  }
+
+  Alert.alert(title, message, [
+    { text: "Cancel", style: "cancel" },
+    {
+      text: "Delete",
+      style: "destructive",
+      onPress: onConfirm,
+    },
+  ]);
 }
 
 export function StudentTicketCenterScreen({ navigation, route }) {
@@ -494,19 +518,12 @@ export function StudentTicketCenterScreen({ navigation, route }) {
       return;
     }
 
-    Alert.alert(
+    confirmAction(
       "Delete ticket?",
       "This will permanently remove the ticket and its attachments. This action cannot be undone.",
-      [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: () => {
-            void deleteTicket();
-          },
-        },
-      ]
+      () => {
+        void deleteTicket();
+      }
     );
   }
 

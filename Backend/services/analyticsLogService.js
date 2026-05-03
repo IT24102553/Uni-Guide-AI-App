@@ -101,7 +101,19 @@ function normalizeEventDate(value) {
     throw appError("Enter a valid event date", 400);
   }
 
-  return eventDate;
+  const today = new Date();
+  const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const eventDateStart = new Date(
+    eventDate.getFullYear(),
+    eventDate.getMonth(),
+    eventDate.getDate()
+  );
+
+  if (eventDateStart >= todayStart) {
+    throw appError("Event date must be before today", 400);
+  }
+
+  return eventDateStart;
 }
 
 function validateEnum(label, value, allowedValues) {

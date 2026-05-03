@@ -23,6 +23,7 @@ export function StudentTabs() {
         headerShown: false,
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: "#8b8f99",
+        tabBarHideOnKeyboard: true,
         tabBarStyle: [
           styles.tabBar,
           {

@@ -20,6 +20,7 @@ export function StaffTabs() {
         headerShown: false,
         tabBarActiveTintColor: colors.secondary,
         tabBarInactiveTintColor: "#8b8f99",
+        tabBarHideOnKeyboard: true,
         tabBarStyle: [
           styles.tabBar,
           {
